@@ -41,7 +41,12 @@ class LoginWall
 
         // Check if current path matches any public route
         $path = $request->path();
-        
+
+        // Always allow Filament admin paths (it has its own auth)
+        if (str_starts_with($path, 'admin') || str_starts_with($path, 'filament')) {
+            return $next($request);
+        }
+
         foreach ($this->publicRoutes as $pattern) {
             if ($this->pathMatches($path, $pattern)) {
                 return $next($request);

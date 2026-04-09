@@ -157,6 +157,9 @@
                 </div>
                 <div class="header-top-right">
                     @auth
+                        @if(auth()->user()->canAccessCms())
+                            <a href="/admin" style="font-size:13px;font-weight:600;color:var(--green);text-decoration:none;">Admin Panel</a>
+                        @endif
                         <span style="font-size:13px;color:var(--grey-600)">{{ auth()->user()->full_name }}</span>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-text">Sign In</a>
