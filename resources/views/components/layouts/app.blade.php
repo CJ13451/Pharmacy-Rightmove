@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ? "{$title} — P3 Pharmacy" : 'P3 Pharmacy — Intelligence. Analysis. Insight.' }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { brand: { DEFAULT: '#00875a', 50: '#e6f7f0', 500: '#00875a', 600: '#007a52', 700: '#006644' } } } } }</script>
     @livewireStyles
     @stack('styles')
     <style>
