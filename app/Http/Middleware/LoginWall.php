@@ -13,6 +13,7 @@ class LoginWall
      */
     protected array $publicRoutes = [
         '/',
+        'home',
         'login',
         'register',
         'forgot-password',
@@ -23,6 +24,9 @@ class LoginWall
         'privacy',
         'seed-db',
         'stripe/webhook',
+        'admin',
+        'admin/*',
+        'livewire/*',
     ];
 
     /**

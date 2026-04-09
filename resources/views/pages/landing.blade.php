@@ -153,7 +153,14 @@
                 </div>
                 <div class="header-top-right">
                     @auth
-                        <a href="{{ route('home') }}" class="btn btn-text">Dashboard</a>
+                        <span style="font-size:13px;color:var(--grey-600);">{{ auth()->user()->full_name }}</span>
+                        @if(auth()->user()->canAccessCms())
+                            <a href="/admin" class="btn btn-text">Admin Panel</a>
+                        @endif
+                        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-text" style="cursor:pointer;">Sign Out</button>
+                        </form>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-text">Sign In</a>
                         <a href="{{ route('register') }}" class="btn btn-primary">Subscribe</a>
@@ -168,14 +175,14 @@
                 <div class="header-url">p3pharmacy.co.uk</div>
             </div>
             <nav class="category-nav">
-                <a href="#" class="active">Home</a>
-                <a href="{{ route('login') }}">News</a>
-                <a href="{{ route('login') }}" class="highlight">Pharmacies for Sale</a>
-                <a href="{{ route('login') }}">Buying Guide</a>
-                <a href="{{ route('login') }}">Valuations</a>
-                <a href="{{ route('login') }}">Training</a>
-                <a href="{{ route('login') }}">Suppliers</a>
-                <a href="{{ route('login') }}">Resources</a>
+                <a href="/" class="active">Home</a>
+                <a href="{{ route('news.index') }}">News</a>
+                <a href="{{ route('listings.index') }}" class="highlight">Pharmacies for Sale</a>
+                <a href="{{ route('buying-guide') }}">Buying Guide</a>
+                <a href="{{ route('valuations') }}">Valuations</a>
+                <a href="{{ route('training.index') }}">Training</a>
+                <a href="{{ route('suppliers.index') }}">Suppliers</a>
+                <a href="{{ route('resources.index') }}">Resources</a>
             </nav>
         </div>
     </header>
@@ -197,10 +204,10 @@
                     <div class="properties-section">
                         <div class="section-header" style="border: none; padding: 0; margin-bottom: 16px;">
                             <h2 class="section-title">Pharmacies for Sale</h2>
-                            <a href="{{ route('login') }}" class="section-link">View all 847 &rarr;</a>
+                            <a href="#" class="section-link">View all 847 &rarr;</a>
                         </div>
                         <div class="properties-grid">
-                            <a href="{{ route('login') }}" class="property-card">
+                            <a href="#" class="property-card">
                                 <div class="property-image"><span class="property-badge">Featured</span></div>
                                 <div class="property-content">
                                     <div class="property-price">&pound;875,000</div>
@@ -208,7 +215,7 @@
                                     <div class="property-location">Kensington, London &middot; Freehold &middot; 8,500 items</div>
                                 </div>
                             </a>
-                            <a href="{{ route('login') }}" class="property-card">
+                            <a href="#" class="property-card">
                                 <div class="property-image"></div>
                                 <div class="property-content">
                                     <div class="property-price">&pound;425,000</div>
@@ -216,7 +223,7 @@
                                     <div class="property-location">Didsbury, Manchester &middot; Leasehold &middot; 6,200 items</div>
                                 </div>
                             </a>
-                            <a href="{{ route('login') }}" class="property-card">
+                            <a href="#" class="property-card">
                                 <div class="property-image"></div>
                                 <div class="property-content">
                                     <div class="property-price">&pound;1,250,000</div>
@@ -224,7 +231,7 @@
                                     <div class="property-location">Clifton, Bristol &middot; Freehold &middot; 12,400 items</div>
                                 </div>
                             </a>
-                            <a href="{{ route('login') }}" class="property-card">
+                            <a href="#" class="property-card">
                                 <div class="property-image"></div>
                                 <div class="property-content">
                                     <div class="property-price">&pound;320,000</div>
@@ -238,10 +245,10 @@
                     <section class="section">
                         <div class="section-header">
                             <h2 class="section-title">Latest News</h2>
-                            <a href="{{ route('login') }}" class="section-link">All news &rarr;</a>
+                            <a href="#" class="section-link">All news &rarr;</a>
                         </div>
                         <div class="news-list">
-                            <a href="{{ route('login') }}" class="news-item">
+                            <a href="#" class="news-item">
                                 <div class="news-thumb"></div>
                                 <div class="news-content">
                                     <div class="story-category">Policy</div>
@@ -249,7 +256,7 @@
                                     <div class="story-meta">8 April 2026 &middot; 4 min read</div>
                                 </div>
                             </a>
-                            <a href="{{ route('login') }}" class="news-item">
+                            <a href="#" class="news-item">
                                 <div class="news-thumb"></div>
                                 <div class="news-content">
                                     <div class="story-category">Market Report</div>
@@ -257,7 +264,7 @@
                                     <div class="story-meta">5 April 2026 &middot; 6 min read</div>
                                 </div>
                             </a>
-                            <a href="{{ route('login') }}" class="news-item">
+                            <a href="#" class="news-item">
                                 <div class="news-thumb"></div>
                                 <div class="news-content">
                                     <div class="story-category">Regulation</div>
@@ -265,7 +272,7 @@
                                     <div class="story-meta">3 April 2026 &middot; 5 min read</div>
                                 </div>
                             </a>
-                            <a href="{{ route('login') }}" class="news-item">
+                            <a href="#" class="news-item">
                                 <div class="news-thumb"></div>
                                 <div class="news-content">
                                     <div class="story-category">Analysis</div>
@@ -281,15 +288,15 @@
                     <div class="sidebar-section">
                         <h3 class="sidebar-title">Tools & Calculators</h3>
                         <div class="quick-tools">
-                            <a href="{{ route('login') }}" class="quick-tool">
+                            <a href="#" class="quick-tool">
                                 <div class="quick-tool-icon">&#x1F4CA;</div>
                                 <div class="quick-tool-content"><h4>Valuation Calculator</h4><p>Estimate pharmacy values</p></div>
                             </a>
-                            <a href="{{ route('login') }}" class="quick-tool">
+                            <a href="#" class="quick-tool">
                                 <div class="quick-tool-icon">&#x1F4CB;</div>
                                 <div class="quick-tool-content"><h4>Due Diligence Checklist</h4><p>Before you make an offer</p></div>
                             </a>
-                            <a href="{{ route('login') }}" class="quick-tool">
+                            <a href="#" class="quick-tool">
                                 <div class="quick-tool-icon">&#x1F4C8;</div>
                                 <div class="quick-tool-content"><h4>Benchmarking Tool</h4><p>Compare your performance</p></div>
                             </a>
@@ -299,15 +306,15 @@
                     <div class="sidebar-section">
                         <h3 class="sidebar-title">Training for Buyers</h3>
                         <div class="training-list">
-                            <a href="{{ route('login') }}" class="training-item">
+                            <a href="#" class="training-item">
                                 <span class="training-badge">Course</span>
                                 <div><h4>Pre-Ownership Programme</h4><p>8 modules &middot; CPD accredited</p></div>
                             </a>
-                            <a href="{{ route('login') }}" class="training-item">
+                            <a href="#" class="training-item">
                                 <span class="training-badge">Guide</span>
                                 <div><h4>The Complete Buying Guide</h4><p>Step-by-step walkthrough</p></div>
                             </a>
-                            <a href="{{ route('login') }}" class="training-item">
+                            <a href="#" class="training-item">
                                 <span class="training-badge">Template</span>
                                 <div><h4>Business Plan Template</h4><p>Bank-ready format</p></div>
                             </a>
@@ -317,28 +324,28 @@
                     <div class="sidebar-section">
                         <h3 class="sidebar-title">Supplier Directory</h3>
                         <div class="suppliers-widget">
-                            <a href="{{ route('login') }}" class="supplier-item">
+                            <a href="#" class="supplier-item">
                                 <div class="supplier-item-logo">AAH</div>
                                 <div class="supplier-item-name">AAH</div>
                                 <div class="supplier-item-cat">Wholesaler</div>
                             </a>
-                            <a href="{{ route('login') }}" class="supplier-item">
+                            <a href="#" class="supplier-item">
                                 <div class="supplier-item-logo">AH</div>
                                 <div class="supplier-item-name">Alliance</div>
                                 <div class="supplier-item-cat">Wholesaler</div>
                             </a>
-                            <a href="{{ route('login') }}" class="supplier-item">
+                            <a href="#" class="supplier-item">
                                 <div class="supplier-item-logo">CG</div>
                                 <div class="supplier-item-name">Cegedim</div>
                                 <div class="supplier-item-cat">PMR</div>
                             </a>
-                            <a href="{{ route('login') }}" class="supplier-item">
+                            <a href="#" class="supplier-item">
                                 <div class="supplier-item-logo">NM</div>
                                 <div class="supplier-item-name">Numark</div>
                                 <div class="supplier-item-cat">Buying Group</div>
                             </a>
                         </div>
-                        <a href="{{ route('login') }}" class="section-link" style="display: block; margin-top: 14px; text-align: center;">View all 240+ suppliers &rarr;</a>
+                        <a href="#" class="section-link" style="display: block; margin-top: 14px; text-align: center;">View all 240+ suppliers &rarr;</a>
                     </div>
 
                     <div class="newsletter-widget">
@@ -355,28 +362,28 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Resources & Guides</h2>
-                    <a href="{{ route('login') }}" class="section-link">View all &rarr;</a>
+                    <a href="#" class="section-link">View all &rarr;</a>
                 </div>
                 <div class="resources-grid">
-                    <a href="{{ route('login') }}" class="resource-card">
+                    <a href="#" class="resource-card">
                         <div class="resource-icon">&#x1F4CA;</div>
                         <div class="resource-type">Tool</div>
                         <h3 class="resource-title">Pharmacy Valuation Calculator</h3>
                         <p class="resource-desc">Estimate value based on items, turnover, and market factors.</p>
                     </a>
-                    <a href="{{ route('login') }}" class="resource-card">
+                    <a href="#" class="resource-card">
                         <div class="resource-icon">&#x1F4CB;</div>
                         <div class="resource-type">Checklist</div>
                         <h3 class="resource-title">Due Diligence Checklist</h3>
                         <p class="resource-desc">Everything to verify before making an offer.</p>
                     </a>
-                    <a href="{{ route('login') }}" class="resource-card">
+                    <a href="#" class="resource-card">
                         <div class="resource-icon">&#x1F393;</div>
                         <div class="resource-type">Course</div>
                         <h3 class="resource-title">Pre-Ownership Programme</h3>
                         <p class="resource-desc">8-module CPD course for prospective buyers.</p>
                     </a>
-                    <a href="{{ route('login') }}" class="resource-card">
+                    <a href="#" class="resource-card">
                         <div class="resource-icon">&#x1F4DD;</div>
                         <div class="resource-type">Template</div>
                         <h3 class="resource-title">Business Plan Template</h3>
@@ -398,28 +405,28 @@
                 <div class="footer-col">
                     <h4>Marketplace</h4>
                     <ul>
-                        <li><a href="{{ route('login') }}">For Sale</a></li>
-                        <li><a href="{{ route('login') }}">To Let</a></li>
-                        <li><a href="{{ route('login') }}">Recently Sold</a></li>
-                        <li><a href="{{ route('login') }}">List Property</a></li>
+                        <li><a href="#">For Sale</a></li>
+                        <li><a href="#">To Let</a></li>
+                        <li><a href="#">Recently Sold</a></li>
+                        <li><a href="#">List Property</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="{{ route('login') }}">Buying Guide</a></li>
-                        <li><a href="{{ route('login') }}">Valuations</a></li>
-                        <li><a href="{{ route('login') }}">Training</a></li>
-                        <li><a href="{{ route('login') }}">Templates</a></li>
+                        <li><a href="#">Buying Guide</a></li>
+                        <li><a href="#">Valuations</a></li>
+                        <li><a href="#">Training</a></li>
+                        <li><a href="#">Templates</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Directory</h4>
                     <ul>
-                        <li><a href="{{ route('login') }}">Wholesalers</a></li>
-                        <li><a href="{{ route('login') }}">PMR Systems</a></li>
-                        <li><a href="{{ route('login') }}">Buying Groups</a></li>
-                        <li><a href="{{ route('login') }}">All Suppliers</a></li>
+                        <li><a href="#">Wholesalers</a></li>
+                        <li><a href="#">PMR Systems</a></li>
+                        <li><a href="#">Buying Groups</a></li>
+                        <li><a href="#">All Suppliers</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
