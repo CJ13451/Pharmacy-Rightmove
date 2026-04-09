@@ -20,7 +20,7 @@ class RoleSeeder extends Seeder
         // Create admin user
         User::create([
             'email' => 'admin@p3pharmacy.co.uk',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'first_name' => 'Admin',
             'last_name' => 'User',
             'job_title' => 'other',
@@ -34,7 +34,7 @@ class RoleSeeder extends Seeder
         // Create editor user
         User::create([
             'email' => 'editor@p3pharmacy.co.uk',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'first_name' => 'Sarah',
             'last_name' => 'Editor',
             'job_title' => 'other',
@@ -48,7 +48,7 @@ class RoleSeeder extends Seeder
         // Create content editor user
         User::create([
             'email' => 'writer@p3pharmacy.co.uk',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'first_name' => 'James',
             'last_name' => 'Writer',
             'job_title' => 'other',
@@ -62,7 +62,7 @@ class RoleSeeder extends Seeder
         // Create estate agent user
         User::create([
             'email' => 'agent@p3pharmacy.co.uk',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'first_name' => 'David',
             'last_name' => 'Agent',
             'job_title' => 'estate_agent',
@@ -76,7 +76,7 @@ class RoleSeeder extends Seeder
         // Create pharmacist user (looking to buy)
         User::create([
             'email' => 'pharmacist@example.com',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'first_name' => 'John',
             'last_name' => 'Smith',
             'job_title' => 'pharmacist',
@@ -93,7 +93,7 @@ class RoleSeeder extends Seeder
         // Create pharmacy owner user
         User::create([
             'email' => 'owner@example.com',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'first_name' => 'Emma',
             'last_name' => 'Owner',
             'job_title' => 'pharmacy_owner',
@@ -112,7 +112,7 @@ class RoleSeeder extends Seeder
         // Create supplier user (free tier)
         User::create([
             'email' => 'supplier@example.com',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'first_name' => 'Mike',
             'last_name' => 'Supplier',
             'job_title' => 'supplier_vendor',
