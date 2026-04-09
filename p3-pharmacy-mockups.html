@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P3 Pharmacy - Page Mockups</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #1a1a1a;
+            --grey-900: #111111;
+            --grey-800: #222222;
+            --grey-700: #444444;
+            --grey-600: #666666;
+            --grey-500: #888888;
+            --grey-400: #aaaaaa;
+            --grey-300: #cccccc;
+            --grey-200: #e0e0e0;
+            --grey-100: #f0f0f0;
+            --grey-50: #f8f8f8;
+            --white: #ffffff;
+            --green: #00875a;
+            --green-light: #e6f4ef;
+            --orange: #ff6b00;
+            --blue: #0066cc;
+            --red: #dc2626;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--grey-100);
+            color: var(--black);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Tab Navigation for Mockups */
+        .mockup-nav {
+            position: sticky;
+            top: 0;
+            background: var(--black);
+            padding: 16px 32px;
+            display: flex;
+            gap: 8px;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .mockup-nav button {
+            padding: 10px 20px;
+            background: var(--grey-800);
+            color: var(--white);
+            border: none;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .mockup-nav button:hover {
+            background: var(--grey-700);
+        }
+
+        .mockup-nav button.active {
+            background: var(--green);
+        }
+
+        .mockup-section {
+            display: none;
+            background: var(--white);
+            min-height: 100vh;
+        }
+
+        .mockup-section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* ========================================
+           SHARED HEADER COMPONENT
+           ======================================== */
+        .header {
+            border-bottom: 1px solid var(--grey-200);
+            background: var(--white);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--grey-100);
+        }
+        
+        .header-top-left {
+            display: flex;
+            gap: 24px;
+            font-size: 13px;
+            color: var(--grey-600);
+        }
+        
+        .header-top-left a {
+            color: var(--grey-600);
+            text-decoration: none;
+        }
+        
+        .header-top-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-lg {
+            padding: 12px 24px;
+            font-size: 14px;
+        }
+        
+        .btn-text {
+            background: none;
+            color: var(--grey-700);
+            padding: 8px 0;
+        }
+        
+        .btn-primary {
+            background: var(--black);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--grey-800);
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-green:hover {
+            background: #006644;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--grey-300);
+            color: var(--grey-700);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--black);
+            color: var(--black);
+        }
+        
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-main {
+            display: flex;
+            align-items: baseline;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            letter-spacing: -1px;
+            color: var(--black);
+            text-decoration: none;
+        }
+        
+        .logo-tagline {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--grey-600);
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        
+        .category-nav {
+            display: flex;
+            gap: 0;
+            border-bottom: 3px solid var(--black);
+        }
+        
+        .category-nav a {
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--grey-700);
+            text-decoration: none;
+            transition: all 0.15s;
+            position: relative;
+        }
+        
+        .category-nav a:hover {
+            color: var(--black);
+            background: var(--grey-50);
+        }
+        
+        .category-nav a.active {
+            color: var(--black);
+        }
+        
+        .category-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--green);
+        }
+        
+        .category-nav a.highlight {
+            background: var(--green);
+            color: white;
+        }
+
+        /* ========================================
+           SHARED COMPONENTS
+           ======================================== */
+        .page-header {
+            padding: 40px 0 32px;
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .page-title {
+            font-family: 'Newsreader', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--grey-600);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--black);
+        }
+        
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .section-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-green {
+            background: var(--green);
+            color: white;
+        }
+
+        .badge-orange {
+            background: var(--orange);
+            color: white;
+        }
+
+        .badge-black {
+            background: var(--black);
+            color: white;
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--grey-300);
+            color: var(--grey-600);
+        }
+
+        /* ========================================
+           1. PHARMACIES FOR SALE PAGE
+           ======================================== */
+        .listings-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        .filters-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .filter-section {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .filter-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--grey-200);
+            font-family: inherit;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--black);
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 13px;
+            color: var(--grey-700);
+            cursor: pointer;
+        }
+
+        .filter-checkbox input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--green);
+        }
+
+        .listings-results {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .results-count {
+            font-size: 14px;
+            color: var(--grey-600);
+        }
+
+        .results-sort select {
+            padding: 8px 12px;
+            border: 1px solid var(--grey-200);
+            font-family: inherit;
+            font-size: 13px;
+            background: var(--white);
+        }
+
+        .listing-card {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            padding: 20px;
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .listing-card:hover {
+            border-color: var(--black);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .listing-image {
+            height: 180px;
+            background: linear-gradient(135deg, #e8e4e0 0%, #d8d4d0 100%);
+            position: relative;
+        }
+
+        .listing-image .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+        }
+
+        .listing-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .listing-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .listing-price-qualifier {
+            font-size: 12px;
+            color: var(--grey-500);
+            font-weight: 500;
+        }
+
+        .listing-title {
+            font-family: 'Newsreader', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--black);
+            margin: 12px 0 8px;
+            line-height: 1.3;
+        }
+
+        .listing-location {
+            font-size: 14px;
+            color: var(--grey-600);
+            margin-bottom: 12px;
+        }
+
+        .listing-stats {
+            display: flex;
+            gap: 24px;
+            padding: 12px 0;
+            border-top: 1px solid var(--grey-100);
+        }
+
+        .listing-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .listing-stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .listing-stat-label {
+            font-size: 11px;
+            color: var(--grey-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .listing-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .listing-tag {
+            padding: 4px 10px;
+            background: var(--grey-100);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--grey-700);
+        }
+
+        /* ========================================
+           2. TRAINING PAGE
+           ======================================== */
+        .training-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 60px 0;
+            color: var(--white);
+        }
+
+        .training-hero-content {
+            max-width: 600px;
+        }
+
+        .training-hero h1 {
+            font-family: 'Newsreader', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .training-hero p {
+            font-size: 18px;
+            color: var(--grey-400);
+            margin-bottom: 24px;
+        }
+
+        .training-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--grey-700);
+        }
+
+        .training-stat-item {
+            text-align: center;
+        }
+
+        .training-stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .training-stat-text {
+            font-size: 12px;
+            color: var(--grey-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 40px 0;
+        }
+
+        .course-card {
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .course-card:hover {
+            border-color: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .course-image {
+            height: 160px;
+            background: linear-gradient(135deg, #2a4a6a 0%, #1a3050 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-image-icon {
+            font-size: 48px;
+            opacity: 0.8;
+        }
+
+        .course-badges {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-category {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .course-title {
+            font-family: 'Newsreader', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .course-desc {
+            font-size: 14px;
+            color: var(--grey-600);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--grey-100);
+        }
+
+        .course-info {
+            font-size: 12px;
+            color: var(--grey-500);
+        }
+
+        .course-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--black);
+        }
+
+        .course-price-free {
+            color: var(--green);
+        }
+
+        /* ========================================
+           3. SUPPLIERS PAGE
+           ======================================== */
+        .suppliers-hero {
+            background: var(--grey-50);
+            padding: 40px 0;
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .suppliers-search {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .suppliers-search h1 {
+            font-family: 'Newsreader', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .suppliers-search p {
+            color: var(--grey-600);
+            margin-bottom: 24px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0;
+            background: var(--white);
+            border: 2px solid var(--black);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px 16px;
+            border: none;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 14px 24px;
+            background: var(--black);
+            color: white;
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 8px 16px;
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--grey-700);
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .category-tab:hover,
+        .category-tab.active {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .suppliers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .supplier-card {
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            padding: 24px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .supplier-card:hover {
+            border-color: var(--black);
+        }
+
+        .supplier-card.featured {
+            border-color: var(--green);
+            border-width: 2px;
+            position: relative;
+        }
+
+        .supplier-card.featured::before {
+            content: 'Featured';
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            background: var(--green);
+            color: white;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .supplier-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--grey-100);
+            border-radius: 8px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--grey-400);
+        }
+
+        .supplier-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .supplier-category {
+            font-size: 12px;
+            color: var(--grey-500);
+            margin-bottom: 12px;
+        }
+
+        .supplier-desc {
+            font-size: 13px;
+            color: var(--grey-600);
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           4. NEWS PAGE
+           ======================================== */
+        .news-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 48px;
+            padding: 40px 0;
+        }
+
+        .featured-story {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--grey-200);
+            margin-bottom: 32px;
+        }
+
+        .featured-image {
+            height: 320px;
+            background: linear-gradient(135deg, #2a4a6a 0%, #1a3050 100%);
+        }
+
+        .featured-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .story-category {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        .featured-content h2 {
+            font-family: 'Newsreader', serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+
+        .featured-content h2 a {
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .story-excerpt {
+            font-size: 16px;
+            color: var(--grey-700);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .story-meta {
+            font-size: 13px;
+            color: var(--grey-500);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .news-card {
+            text-decoration: none;
+        }
+
+        .news-card-image {
+            height: 160px;
+            background: var(--grey-100);
+            margin-bottom: 16px;
+        }
+
+        .news-card h3 {
+            font-family: 'Newsreader', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+            line-height: 1.35;
+        }
+
+        .news-card:hover h3 {
+            color: var(--green);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .sidebar-section {
+            border: 1px solid var(--grey-200);
+            padding: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--black);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--black);
+        }
+
+        .trending-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .trending-item {
+            display: flex;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .trending-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--grey-300);
+            min-width: 32px;
+        }
+
+        .trending-content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.4;
+        }
+
+        .trending-item:hover h4 {
+            color: var(--green);
+        }
+
+        .trending-meta {
+            font-size: 11px;
+            color: var(--grey-500);
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           5. RESOURCES PAGE
+           ======================================== */
+        .resources-hero {
+            background: linear-gradient(135deg, var(--green) 0%, #006644 100%);
+            padding: 60px 0;
+            color: var(--white);
+        }
+
+        .resources-hero h1 {
+            font-family: 'Newsreader', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .resources-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .resources-categories {
+            background: var(--grey-50);
+            padding: 24px 0;
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .resources-categories-inner {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+        }
+
+        .resource-category-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            text-decoration: none;
+            color: var(--grey-700);
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+
+        .resource-category-link:hover,
+        .resource-category-link.active {
+            border-color: var(--black);
+            color: var(--black);
+        }
+
+        .resource-category-icon {
+            font-size: 20px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 40px 0;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            padding: 24px;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .resource-card:hover {
+            border-color: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .resource-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--grey-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .resource-type {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--grey-500);
+            margin-bottom: 8px;
+        }
+
+        .resource-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .resource-desc {
+            font-size: 13px;
+            color: var(--grey-600);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--grey-100);
+            font-size: 12px;
+            color: var(--grey-500);
+        }
+
+        .resource-cta {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        /* Newsletter Widget */
+        .newsletter-widget {
+            background: var(--black);
+            padding: 24px;
+        }
+
+        .newsletter-widget h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .newsletter-widget p {
+            font-size: 14px;
+            color: var(--grey-400);
+            margin-bottom: 16px;
+        }
+
+        .newsletter-widget input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--grey-700);
+            background: var(--grey-900);
+            color: var(--white);
+            font-family: inherit;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter-widget button {
+            width: 100%;
+            padding: 12px;
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 56px 0 28px;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--grey-700);
+        }
+        
+        .footer-brand .logo-main {
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        
+        .footer-brand .logo-tagline {
+            color: var(--grey-400);
+            margin-bottom: 12px;
+        }
+        
+        .footer-desc {
+            font-size: 13px;
+            color: var(--grey-400);
+            line-height: 1.6;
+        }
+        
+        .footer-col h4 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col a {
+            color: var(--grey-400);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.15s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--white);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 28px;
+            font-size: 12px;
+            color: var(--grey-500);
+        }
+        
+        .footer-bottom a {
+            color: var(--grey-500);
+            text-decoration: none;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mockup Navigation -->
+    <nav class="mockup-nav">
+        <button class="active" onclick="showSection('listings')">Pharmacies for Sale</button>
+        <button onclick="showSection('training')">Training</button>
+        <button onclick="showSection('suppliers')">Suppliers</button>
+        <button onclick="showSection('news')">News</button>
+        <button onclick="showSection('resources')">Resources</button>
+    </nav>
+
+    <!-- ================================================
+         1. PHARMACIES FOR SALE
+         ================================================ -->
+    <section id="listings" class="mockup-section active">
+        <header class="header">
+            <div class="container">
+                <div class="header-top">
+                    <div class="header-top-left">
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                    <div class="header-top-right">
+                        <a href="#" class="btn btn-text">Sign In</a>
+                        <a href="#" class="btn btn-primary">Create Account</a>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <a href="#" class="logo">
+                        <div class="logo-main">
+                            <span>p3</span><span style="font-weight:700">pharmacy</span>
+                        </div>
+                        <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    </a>
+                </div>
+                <nav class="category-nav">
+                    <a href="#" class="active">For Sale</a>
+                    <a href="#">Training</a>
+                    <a href="#">Suppliers</a>
+                    <a href="#">News</a>
+                    <a href="#">Resources</a>
+                    <a href="#" class="highlight">List Your Pharmacy</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="listings-layout">
+                    <!-- Filters Sidebar -->
+                    <aside class="filters-sidebar">
+                        <div class="filter-section">
+                            <div class="filter-title">Location</div>
+                            <input type="text" class="filter-input" placeholder="City, postcode or region">
+                            <select class="filter-input">
+                                <option>All Regions</option>
+                                <option>London</option>
+                                <option>South East</option>
+                                <option>South West</option>
+                                <option>Midlands</option>
+                                <option>North West</option>
+                                <option>North East</option>
+                                <option>Scotland</option>
+                                <option>Wales</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-section">
+                            <div class="filter-title">Price Range</div>
+                            <div class="filter-row">
+                                <input type="text" class="filter-input" placeholder="Min £">
+                                <input type="text" class="filter-input" placeholder="Max £">
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <div class="filter-title">Monthly Items</div>
+                            <div class="filter-row">
+                                <input type="text" class="filter-input" placeholder="Min">
+                                <input type="text" class="filter-input" placeholder="Max">
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <div class="filter-title">Property Type</div>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Freehold
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked> Leasehold
+                            </label>
+                        </div>
+
+                        <div class="filter-section">
+                            <div class="filter-title">Features</div>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> NHS Contract
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Accommodation
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox"> Car Parking
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary" style="width:100%">Apply Filters</button>
+                    </aside>
+
+                    <!-- Results -->
+                    <div class="listings-results">
+                        <div class="results-header">
+                            <span class="results-count">Showing <strong>47</strong> pharmacies for sale</span>
+                            <div class="results-sort">
+                                <select>
+                                    <option>Sort: Newest First</option>
+                                    <option>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                    <option>Items: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Listing Card 1 -->
+                        <a href="#" class="listing-card">
+                            <div class="listing-image">
+                                <span class="badge badge-green">Featured</span>
+                            </div>
+                            <div class="listing-content">
+                                <div>
+                                    <div class="listing-price">£425,000 <span class="listing-price-qualifier">Guide Price</span></div>
+                                    <h3 class="listing-title">Well-Established Community Pharmacy in Prime Location</h3>
+                                    <div class="listing-location">📍 Islington, North London</div>
+                                </div>
+                                <div class="listing-stats">
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">8,500</span>
+                                        <span class="listing-stat-label">Monthly Items</span>
+                                    </div>
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">£1.2M</span>
+                                        <span class="listing-stat-label">Turnover</span>
+                                    </div>
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">Leasehold</span>
+                                        <span class="listing-stat-label">Tenure</span>
+                                    </div>
+                                </div>
+                                <div class="listing-tags">
+                                    <span class="listing-tag">NHS Contract</span>
+                                    <span class="listing-tag">Blister Packs</span>
+                                    <span class="listing-tag">4 Staff</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Listing Card 2 -->
+                        <a href="#" class="listing-card">
+                            <div class="listing-image">
+                                <span class="badge badge-orange">Price Reduced</span>
+                            </div>
+                            <div class="listing-content">
+                                <div>
+                                    <div class="listing-price">£285,000 <span class="listing-price-qualifier">Offers Over</span></div>
+                                    <h3 class="listing-title">Freehold Pharmacy with Accommodation in Market Town</h3>
+                                    <div class="listing-location">📍 Stratford-upon-Avon, Warwickshire</div>
+                                </div>
+                                <div class="listing-stats">
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">5,200</span>
+                                        <span class="listing-stat-label">Monthly Items</span>
+                                    </div>
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">£680K</span>
+                                        <span class="listing-stat-label">Turnover</span>
+                                    </div>
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">Freehold</span>
+                                        <span class="listing-stat-label">Tenure</span>
+                                    </div>
+                                </div>
+                                <div class="listing-tags">
+                                    <span class="listing-tag">NHS Contract</span>
+                                    <span class="listing-tag">3-Bed Flat</span>
+                                    <span class="listing-tag">Parking</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Listing Card 3 -->
+                        <a href="#" class="listing-card">
+                            <div class="listing-image"></div>
+                            <div class="listing-content">
+                                <div>
+                                    <div class="listing-price">£175,000 <span class="listing-price-qualifier">Asking Price</span></div>
+                                    <h3 class="listing-title">Compact Urban Pharmacy with Growth Potential</h3>
+                                    <div class="listing-location">📍 Salford, Greater Manchester</div>
+                                </div>
+                                <div class="listing-stats">
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">3,800</span>
+                                        <span class="listing-stat-label">Monthly Items</span>
+                                    </div>
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">£420K</span>
+                                        <span class="listing-stat-label">Turnover</span>
+                                    </div>
+                                    <div class="listing-stat">
+                                        <span class="listing-stat-value">Leasehold</span>
+                                        <span class="listing-stat-label">Tenure</span>
+                                    </div>
+                                </div>
+                                <div class="listing-tags">
+                                    <span class="listing-tag">NHS Contract</span>
+                                    <span class="listing-tag">2 Staff</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- ================================================
+         2. TRAINING
+         ================================================ -->
+    <section id="training" class="mockup-section">
+        <header class="header">
+            <div class="container">
+                <div class="header-top">
+                    <div class="header-top-left">
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                    <div class="header-top-right">
+                        <a href="#" class="btn btn-text">Sign In</a>
+                        <a href="#" class="btn btn-primary">Create Account</a>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <a href="#" class="logo">
+                        <div class="logo-main">
+                            <span>p3</span><span style="font-weight:700">pharmacy</span>
+                        </div>
+                        <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    </a>
+                </div>
+                <nav class="category-nav">
+                    <a href="#">For Sale</a>
+                    <a href="#" class="active">Training</a>
+                    <a href="#">Suppliers</a>
+                    <a href="#">News</a>
+                    <a href="#">Resources</a>
+                    <a href="#" class="highlight">List Your Pharmacy</a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="training-hero">
+            <div class="container">
+                <div class="training-hero-content">
+                    <h1>Pharmacy Ownership Training</h1>
+                    <p>CPD-accredited courses designed specifically for pharmacists buying, running, or growing their pharmacy business.</p>
+                    <a href="#" class="btn btn-green btn-lg">Browse All Courses</a>
+                </div>
+                <div class="training-stats">
+                    <div class="training-stat-item">
+                        <div class="training-stat-number">12</div>
+                        <div class="training-stat-text">Courses</div>
+                    </div>
+                    <div class="training-stat-item">
+                        <div class="training-stat-number">48</div>
+                        <div class="training-stat-text">Modules</div>
+                    </div>
+                    <div class="training-stat-item">
+                        <div class="training-stat-number">850+</div>
+                        <div class="training-stat-text">Enrolled</div>
+                    </div>
+                    <div class="training-stat-item">
+                        <div class="training-stat-number">CPD</div>
+                        <div class="training-stat-text">Accredited</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <div class="container">
+                <div class="section" style="padding-top:40px">
+                    <div class="section-header">
+                        <h2 class="section-title">Featured Courses</h2>
+                        <a href="#" class="section-link">View all courses →</a>
+                    </div>
+                </div>
+
+                <div class="courses-grid">
+                    <!-- Course 1 -->
+                    <a href="#" class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #00875a 0%, #006644 100%);">
+                            <div class="course-badges">
+                                <span class="badge badge-black">Popular</span>
+                            </div>
+                            <span class="course-image-icon">🎓</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Pre-Ownership</div>
+                            <h3 class="course-title">The Complete Pre-Ownership Programme</h3>
+                            <p class="course-desc">Everything you need to know before buying your first pharmacy. From due diligence to negotiations.</p>
+                            <div class="course-meta">
+                                <span class="course-info">8 modules · 12 CPD hours</span>
+                                <span class="course-price">£299</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Course 2 -->
+                    <a href="#" class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #2a4a6a 0%, #1a3050 100%);">
+                            <span class="course-image-icon">📊</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Finance</div>
+                            <h3 class="course-title">Pharmacy Valuation Masterclass</h3>
+                            <p class="course-desc">Learn how to accurately value a pharmacy using multiple methods and identify red flags.</p>
+                            <div class="course-meta">
+                                <span class="course-info">4 modules · 6 CPD hours</span>
+                                <span class="course-price">£149</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Course 3 -->
+                    <a href="#" class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #ff6b00 0%, #cc5500 100%);">
+                            <div class="course-badges">
+                                <span class="badge badge-green">New</span>
+                            </div>
+                            <span class="course-image-icon">💼</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Management</div>
+                            <h3 class="course-title">Staff Management & HR Essentials</h3>
+                            <p class="course-desc">Hiring, training, performance reviews, and employment law for pharmacy owners.</p>
+                            <div class="course-meta">
+                                <span class="course-info">6 modules · 8 CPD hours</span>
+                                <span class="course-price">£199</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Course 4 -->
+                    <a href="#" class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);">
+                            <span class="course-image-icon">📋</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Due Diligence</div>
+                            <h3 class="course-title">Due Diligence Deep Dive</h3>
+                            <p class="course-desc">Comprehensive checklist and methodology for evaluating a pharmacy acquisition.</p>
+                            <div class="course-meta">
+                                <span class="course-info">3 modules · 4 CPD hours</span>
+                                <span class="course-price course-price-free">Free</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Course 5 -->
+                    <a href="#" class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%);">
+                            <span class="course-image-icon">📈</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Growth</div>
+                            <h3 class="course-title">Maximising Pharmacy Services Revenue</h3>
+                            <p class="course-desc">How to build and scale NHS and private services for sustainable growth.</p>
+                            <div class="course-meta">
+                                <span class="course-info">5 modules · 7 CPD hours</span>
+                                <span class="course-price">£179</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Course 6 -->
+                    <a href="#" class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);">
+                            <span class="course-image-icon">🏦</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Finance</div>
+                            <h3 class="course-title">Securing Finance for Acquisition</h3>
+                            <p class="course-desc">How to approach banks, prepare your business plan, and negotiate terms.</p>
+                            <div class="course-meta">
+                                <span class="course-info">4 modules · 5 CPD hours</span>
+                                <span class="course-price">£129</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- ================================================
+         3. SUPPLIERS
+         ================================================ -->
+    <section id="suppliers" class="mockup-section">
+        <header class="header">
+            <div class="container">
+                <div class="header-top">
+                    <div class="header-top-left">
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                    <div class="header-top-right">
+                        <a href="#" class="btn btn-text">Sign In</a>
+                        <a href="#" class="btn btn-primary">Create Account</a>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <a href="#" class="logo">
+                        <div class="logo-main">
+                            <span>p3</span><span style="font-weight:700">pharmacy</span>
+                        </div>
+                        <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    </a>
+                </div>
+                <nav class="category-nav">
+                    <a href="#">For Sale</a>
+                    <a href="#">Training</a>
+                    <a href="#" class="active">Suppliers</a>
+                    <a href="#">News</a>
+                    <a href="#">Resources</a>
+                    <a href="#" class="highlight">List Your Pharmacy</a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="suppliers-hero">
+            <div class="container">
+                <div class="suppliers-search">
+                    <h1>Supplier Directory</h1>
+                    <p>Find and compare 240+ suppliers, wholesalers, and service providers for UK pharmacies.</p>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search suppliers by name or service...">
+                        <button>Search</button>
+                    </div>
+                    <div class="category-tabs">
+                        <a href="#" class="category-tab active">All</a>
+                        <a href="#" class="category-tab">Wholesalers</a>
+                        <a href="#" class="category-tab">PMR Systems</a>
+                        <a href="#" class="category-tab">Buying Groups</a>
+                        <a href="#" class="category-tab">Dispensing Robots</a>
+                        <a href="#" class="category-tab">Accountants</a>
+                        <a href="#" class="category-tab">Insurance</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <div class="container">
+                <div class="suppliers-grid">
+                    <!-- Supplier 1 - Featured -->
+                    <a href="#" class="supplier-card featured">
+                        <div class="supplier-logo">AAH</div>
+                        <h3 class="supplier-name">AAH Pharmaceuticals</h3>
+                        <div class="supplier-category">Full-Line Wholesaler</div>
+                        <p class="supplier-desc">UK's largest pharmaceutical wholesaler with next-day delivery nationwide.</p>
+                    </a>
+
+                    <!-- Supplier 2 - Featured -->
+                    <a href="#" class="supplier-card featured">
+                        <div class="supplier-logo">AL</div>
+                        <h3 class="supplier-name">Alliance Healthcare</h3>
+                        <div class="supplier-category">Full-Line Wholesaler</div>
+                        <p class="supplier-desc">Comprehensive pharmaceutical distribution and support services.</p>
+                    </a>
+
+                    <!-- Supplier 3 -->
+                    <a href="#" class="supplier-card">
+                        <div class="supplier-logo">CG</div>
+                        <h3 class="supplier-name">Cegedim Rx</h3>
+                        <div class="supplier-category">PMR System</div>
+                        <p class="supplier-desc">Market-leading pharmacy management software with integrated services.</p>
+                    </a>
+
+                    <!-- Supplier 4 -->
+                    <a href="#" class="supplier-card">
+                        <div class="supplier-logo">PH</div>
+                        <h3 class="supplier-name">Pharmaself24</h3>
+                        <div class="supplier-category">Dispensing Automation</div>
+                        <p class="supplier-desc">24/7 automated prescription collection points for pharmacies.</p>
+                    </a>
+
+                    <!-- Supplier 5 -->
+                    <a href="#" class="supplier-card">
+                        <div class="supplier-logo">NM</div>
+                        <h3 class="supplier-name">Numark</h3>
+                        <div class="supplier-category">Buying Group</div>
+                        <p class="supplier-desc">Support services and buying power for independent pharmacies.</p>
+                    </a>
+
+                    <!-- Supplier 6 -->
+                    <a href="#" class="supplier-card">
+                        <div class="supplier-logo">AV</div>
+                        <h3 class="supplier-name">Avicenna</h3>
+                        <div class="supplier-category">Buying Group</div>
+                        <p class="supplier-desc">Member-owned alliance offering competitive pricing and support.</p>
+                    </a>
+
+                    <!-- Supplier 7 -->
+                    <a href="#" class="supplier-card">
+                        <div class="supplier-logo">TP</div>
+                        <h3 class="supplier-name">Titan PMR</h3>
+                        <div class="supplier-category">PMR System</div>
+                        <p class="supplier-desc">Cloud-based pharmacy management with advanced analytics.</p>
+                    </a>
+
+                    <!-- Supplier 8 -->
+                    <a href="#" class="supplier-card">
+                        <div class="supplier-logo">HK</div>
+                        <h3 class="supplier-name">Hutchings & Co</h3>
+                        <div class="supplier-category">Specialist Accountant</div>
+                        <p class="supplier-desc">Pharmacy-specialist accountants with 30+ years experience.</p>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- ================================================
+         4. NEWS
+         ================================================ -->
+    <section id="news" class="mockup-section">
+        <header class="header">
+            <div class="container">
+                <div class="header-top">
+                    <div class="header-top-left">
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                    <div class="header-top-right">
+                        <a href="#" class="btn btn-text">Sign In</a>
+                        <a href="#" class="btn btn-primary">Create Account</a>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <a href="#" class="logo">
+                        <div class="logo-main">
+                            <span>p3</span><span style="font-weight:700">pharmacy</span>
+                        </div>
+                        <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    </a>
+                </div>
+                <nav class="category-nav">
+                    <a href="#">For Sale</a>
+                    <a href="#">Training</a>
+                    <a href="#">Suppliers</a>
+                    <a href="#" class="active">News</a>
+                    <a href="#">Resources</a>
+                    <a href="#" class="highlight">List Your Pharmacy</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="news-layout">
+                    <div class="news-main">
+                        <!-- Featured Story -->
+                        <div class="featured-story">
+                            <div class="featured-image"></div>
+                            <div class="featured-content">
+                                <div class="story-category">Breaking</div>
+                                <h2><a href="#">NHS England confirms Phase 1 ICB mergers: 42 reduced to 36 from April 2026</a></h2>
+                                <p class="story-excerpt">The restructuring will see six ICB mergers complete by April, with implications for pharmacy contract holders and service commissioning across affected regions.</p>
+                                <div class="story-meta">8 April 2026 · 5 min read</div>
+                            </div>
+                        </div>
+
+                        <!-- News Section -->
+                        <div class="section">
+                            <div class="section-header">
+                                <h2 class="section-title">Latest News</h2>
+                                <a href="#" class="section-link">View all →</a>
+                            </div>
+
+                            <div class="news-grid">
+                                <a href="#" class="news-card">
+                                    <div class="news-card-image"></div>
+                                    <div class="story-category">Market Analysis</div>
+                                    <h3>Q1 2026: Pharmacy transaction volumes down 12% as buyers await funding clarity</h3>
+                                    <div class="story-meta">7 April 2026 · 4 min read</div>
+                                </a>
+
+                                <a href="#" class="news-card">
+                                    <div class="news-card-image"></div>
+                                    <div class="story-category">Policy</div>
+                                    <h3>PSNC responds to contractual framework consultation with funding demands</h3>
+                                    <div class="story-meta">5 April 2026 · 3 min read</div>
+                                </a>
+
+                                <a href="#" class="news-card">
+                                    <div class="news-card-image"></div>
+                                    <div class="story-category">Analysis</div>
+                                    <h3>Independent prescribing: The commercial opportunity for pharmacy owners</h3>
+                                    <div class="story-meta">1 April 2026 · 7 min read</div>
+                                </a>
+
+                                <a href="#" class="news-card">
+                                    <div class="news-card-image"></div>
+                                    <div class="story-category">Interview</div>
+                                    <h3>From locum to three-pharmacy group: How Sarah Chen built her portfolio</h3>
+                                    <div class="story-meta">28 March 2026 · 8 min read</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Trending</h3>
+                            <div class="trending-list">
+                                <a href="#" class="trending-item">
+                                    <span class="trending-number">1</span>
+                                    <div class="trending-content">
+                                        <h4>ICB merger impact on pharmacy contracts explained</h4>
+                                        <div class="trending-meta">2.4k views</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="trending-item">
+                                    <span class="trending-number">2</span>
+                                    <div class="trending-content">
+                                        <h4>Pharmacy First data: Top performers revealed</h4>
+                                        <div class="trending-meta">1.8k views</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="trending-item">
+                                    <span class="trending-number">3</span>
+                                    <div class="trending-content">
+                                        <h4>Category M prices: April 2026 changes</h4>
+                                        <div class="trending-meta">1.5k views</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="trending-item">
+                                    <span class="trending-number">4</span>
+                                    <div class="trending-content">
+                                        <h4>London pharmacy sells for record £1.2M</h4>
+                                        <div class="trending-meta">1.2k views</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="newsletter-widget">
+                            <h3>Weekly Intelligence</h3>
+                            <p>Analysis & insights for pharmacy owners. Every Thursday.</p>
+                            <input type="email" placeholder="Your email">
+                            <button>Subscribe Free</button>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Topics</h3>
+                            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                                <a href="#" class="category-tab" style="font-size:12px;padding:6px 12px;">NHS Funding</a>
+                                <a href="#" class="category-tab" style="font-size:12px;padding:6px 12px;">Market Analysis</a>
+                                <a href="#" class="category-tab" style="font-size:12px;padding:6px 12px;">Transactions</a>
+                                <a href="#" class="category-tab" style="font-size:12px;padding:6px 12px;">Policy</a>
+                                <a href="#" class="category-tab" style="font-size:12px;padding:6px 12px;">Technology</a>
+                                <a href="#" class="category-tab" style="font-size:12px;padding:6px 12px;">Services</a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- ================================================
+         5. RESOURCES
+         ================================================ -->
+    <section id="resources" class="mockup-section">
+        <header class="header">
+            <div class="container">
+                <div class="header-top">
+                    <div class="header-top-left">
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                    <div class="header-top-right">
+                        <a href="#" class="btn btn-text">Sign In</a>
+                        <a href="#" class="btn btn-primary">Create Account</a>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <a href="#" class="logo">
+                        <div class="logo-main">
+                            <span>p3</span><span style="font-weight:700">pharmacy</span>
+                        </div>
+                        <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    </a>
+                </div>
+                <nav class="category-nav">
+                    <a href="#">For Sale</a>
+                    <a href="#">Training</a>
+                    <a href="#">Suppliers</a>
+                    <a href="#">News</a>
+                    <a href="#" class="active">Resources</a>
+                    <a href="#" class="highlight">List Your Pharmacy</a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="resources-hero">
+            <div class="container">
+                <h1>Resources & Tools</h1>
+                <p>Calculators, templates, guides, and checklists to help you buy, run, and grow your pharmacy business.</p>
+            </div>
+        </div>
+
+        <div class="resources-categories">
+            <div class="container">
+                <div class="resources-categories-inner">
+                    <a href="#" class="resource-category-link active">
+                        <span class="resource-category-icon">📁</span>
+                        All Resources
+                    </a>
+                    <a href="#" class="resource-category-link">
+                        <span class="resource-category-icon">📊</span>
+                        Calculators
+                    </a>
+                    <a href="#" class="resource-category-link">
+                        <span class="resource-category-icon">📝</span>
+                        Templates
+                    </a>
+                    <a href="#" class="resource-category-link">
+                        <span class="resource-category-icon">✅</span>
+                        Checklists
+                    </a>
+                    <a href="#" class="resource-category-link">
+                        <span class="resource-category-icon">📖</span>
+                        Guides
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <div class="container">
+                <div class="resources-grid">
+                    <!-- Resource 1 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">📊</div>
+                        <div class="resource-type">Calculator</div>
+                        <h3 class="resource-title">Pharmacy Valuation Calculator</h3>
+                        <p class="resource-desc">Estimate the value of any pharmacy based on items, turnover, gross profit, and market factors.</p>
+                        <div class="resource-meta">
+                            <span>Free tool</span>
+                            <span class="resource-cta">Use calculator →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 2 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">✅</div>
+                        <div class="resource-type">Checklist</div>
+                        <h3 class="resource-title">Due Diligence Checklist</h3>
+                        <p class="resource-desc">120+ items to verify before making an offer on a pharmacy. Print or use interactively.</p>
+                        <div class="resource-meta">
+                            <span>PDF Download</span>
+                            <span class="resource-cta">Download →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 3 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">📝</div>
+                        <div class="resource-type">Template</div>
+                        <h3 class="resource-title">Business Plan Template</h3>
+                        <p class="resource-desc">Bank-ready business plan template specifically designed for pharmacy acquisitions.</p>
+                        <div class="resource-meta">
+                            <span>Word & PDF</span>
+                            <span class="resource-cta">Download →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 4 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">📖</div>
+                        <div class="resource-type">Guide</div>
+                        <h3 class="resource-title">The Complete Buying Guide</h3>
+                        <p class="resource-desc">Step-by-step guide covering the entire pharmacy acquisition process from start to finish.</p>
+                        <div class="resource-meta">
+                            <span>45 pages</span>
+                            <span class="resource-cta">Read guide →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 5 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">💰</div>
+                        <div class="resource-type">Calculator</div>
+                        <h3 class="resource-title">Loan Repayment Calculator</h3>
+                        <p class="resource-desc">Calculate monthly repayments and total interest for pharmacy acquisition loans.</p>
+                        <div class="resource-meta">
+                            <span>Free tool</span>
+                            <span class="resource-cta">Use calculator →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 6 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">📈</div>
+                        <div class="resource-type">Calculator</div>
+                        <h3 class="resource-title">Benchmarking Tool</h3>
+                        <p class="resource-desc">Compare your pharmacy's performance against industry averages and top performers.</p>
+                        <div class="resource-meta">
+                            <span>Free tool</span>
+                            <span class="resource-cta">Use tool →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 7 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">📋</div>
+                        <div class="resource-type">Template</div>
+                        <h3 class="resource-title">Staff Handbook Template</h3>
+                        <p class="resource-desc">Comprehensive employee handbook template covering policies, procedures, and compliance.</p>
+                        <div class="resource-meta">
+                            <span>Word Document</span>
+                            <span class="resource-cta">Download →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 8 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">🔍</div>
+                        <div class="resource-type">Checklist</div>
+                        <h3 class="resource-title">First 100 Days Checklist</h3>
+                        <p class="resource-desc">Essential tasks and priorities for your first 100 days as a new pharmacy owner.</p>
+                        <div class="resource-meta">
+                            <span>PDF Download</span>
+                            <span class="resource-cta">Download →</span>
+                        </div>
+                    </a>
+
+                    <!-- Resource 9 -->
+                    <a href="#" class="resource-card">
+                        <div class="resource-icon">⚖️</div>
+                        <div class="resource-type">Guide</div>
+                        <h3 class="resource-title">Negotiation Guide</h3>
+                        <p class="resource-desc">Tactics and strategies for negotiating the best deal when buying a pharmacy.</p>
+                        <div class="resource-meta">
+                            <span>28 pages</span>
+                            <span class="resource-cta">Read guide →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Footer (shown on all pages) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo-main">
+                        <span>p3</span><span style="font-weight:700">pharmacy</span>
+                    </div>
+                    <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    <p class="footer-desc">The essential resource for UK pharmacy owners and prospective buyers.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Marketplace</h4>
+                    <ul>
+                        <li><a href="#">For Sale</a></li>
+                        <li><a href="#">To Let</a></li>
+                        <li><a href="#">Recently Sold</a></li>
+                        <li><a href="#">List Property</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Buying Guide</a></li>
+                        <li><a href="#">Valuations</a></li>
+                        <li><a href="#">Training</a></li>
+                        <li><a href="#">Templates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Directory</h4>
+                    <ul>
+                        <li><a href="#">Wholesalers</a></li>
+                        <li><a href="#">PMR Systems</a></li>
+                        <li><a href="#">Buying Groups</a></li>
+                        <li><a href="#">All Suppliers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <span>© 2026 P3 Pharmacy. All rights reserved.</span>
+                <span>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.mockup-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update nav buttons
+            document.querySelectorAll('.mockup-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
