@@ -20,6 +20,7 @@ return new class extends Migration
             // Subscription (for paid tiers)
             $table->string('subscription_status')->default('none'); // none, active, past_due, cancelled
             $table->string('stripe_subscription_id')->nullable();
+            $table->string('stripe_customer_id')->nullable();
             $table->timestamp('subscription_expires_at')->nullable();
             
             // Basic Info (all tiers)
