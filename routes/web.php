@@ -20,7 +20,7 @@ Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name
 
 // Temporary seed route
 Route::get('/seed-db', function () {
-    \App\Models\User::truncate();
+    \App\Models\User::query()->delete();
 
     // Create admin directly with DB insert to avoid any model interference
     \Illuminate\Support\Facades\DB::table('users')->insert([
