@@ -22,6 +22,7 @@ class Supplier extends Model
         'tier',
         'subscription_status',
         'stripe_subscription_id',
+        'stripe_customer_id',
         'subscription_expires_at',
         'name',
         'category',

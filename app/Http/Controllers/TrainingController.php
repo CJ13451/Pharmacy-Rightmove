@@ -7,6 +7,7 @@ use App\Models\CourseModule;
 use App\Models\CoursePurchase;
 use App\Models\Enrolment;
 use App\Models\ModuleProgress;
+use App\Services\StripeService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -167,6 +168,81 @@ class TrainingController extends Controller
             'nextModule',
             'previousModule'
         ));
+    }
+
+    public function purchase(Request $request, string $slug)
+    {
+        $course = Course::published()
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $user = auth()->user();
+
+        if ($course->is_free || $course->price <= 0) {
+            return redirect()->route('training.show', $course->slug);
+        }
+
+        // Check if already purchased
+        $purchased = CoursePurchase::where('user_id', $user->id)
+            ->where('course_id', $course->id)
+            ->where('status', 'completed')
+            ->exists();
+
+        if ($purchased) {
+            return redirect()->route('training.show', $course->slug)
+                ->with('info', 'You have already purchased this course.');
+        }
+
+        $stripeService = app(StripeService::class);
+        $session = $stripeService->createCourseCheckout($user, $course);
+
+        return redirect($session->url);
+    }
+
+    public function purchaseSuccess(Request $request, string $slug): View
+    {
+        $course = Course::published()
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        return view('pages.training.show', [
+            'course' => $course->load('modules'),
+            'enrolment' => Enrolment::where('user_id', auth()->id())
+                ->where('course_id', $course->id)
+                ->first(),
+            'hasAccess' => $course->isAccessibleBy(auth()->user()),
+            'moduleProgress' => [],
+            'purchaseSuccess' => true,
+        ]);
+    }
+
+    public function scormCommit(Request $request, string $courseSlug, string $moduleId)
+    {
+        $course = Course::published()
+            ->where('slug', $courseSlug)
+            ->firstOrFail();
+
+        $module = CourseModule::where('course_id', $course->id)
+            ->where('id', $moduleId)
+            ->firstOrFail();
+
+        $user = auth()->user();
+
+        if (!$course->isAccessibleBy($user)) {
+            abort(403, 'You do not have access to this course.');
+        }
+
+        $enrolment = Enrolment::where('user_id', $user->id)
+            ->where('course_id', $course->id)
+            ->firstOrFail();
+
+        $progress = ModuleProgress::where('enrolment_id', $enrolment->id)
+            ->where('module_id', $module->id)
+            ->firstOrFail();
+
+        $progress->updateScormData($request->all());
+
+        return response()->json(['success' => true]);
     }
 
     public function completeModule(Request $request, string $courseSlug, string $moduleId)

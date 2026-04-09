@@ -139,14 +139,14 @@ class ListingController extends Controller
 
         $user = auth()->user();
 
-        $existing = SavedListing::where('user_id', $user->id)
+        $deleted = SavedListing::where('user_id', $user->id)
             ->where('listing_id', $listing->id)
-            ->first();
+            ->delete();
 
-        if ($existing) {
-            $existing->delete();
+        if ($deleted) {
             $listing->decrement('saves_count');
             $message = 'Listing removed from saved.';
+            $saved = false;
         } else {
             SavedListing::create([
                 'user_id' => $user->id,
@@ -154,10 +154,11 @@ class ListingController extends Controller
             ]);
             $listing->increment('saves_count');
             $message = 'Listing saved.';
+            $saved = true;
         }
 
         if (request()->wantsJson()) {
-            return response()->json(['message' => $message, 'saved' => !$existing]);
+            return response()->json(['message' => $message, 'saved' => $saved]);
         }
 
         return back()->with('success', $message);

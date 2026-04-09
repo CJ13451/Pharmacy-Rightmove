@@ -70,7 +70,7 @@ class DotdigitalService
                 $this->addToAddressBook($user->email, 'buyers');
             }
 
-            if ($user->isAgent()) {
+            if ($user->isEstateAgent()) {
                 $this->addToAddressBook($user->email, 'agents');
             }
 

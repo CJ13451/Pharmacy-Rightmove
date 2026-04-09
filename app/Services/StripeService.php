@@ -174,9 +174,9 @@ class StripeService
             'user_id' => $userId,
             'course_id' => $courseId,
             'amount' => $session->amount_total,
-            'stripe_payment_id' => $session->payment_intent,
-            'stripe_session_id' => $session->id,
+            'stripe_payment_intent_id' => $session->payment_intent,
             'status' => 'completed',
+            'purchased_at' => now(),
         ]);
 
         // Create enrolment
