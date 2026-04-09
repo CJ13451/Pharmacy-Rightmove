@@ -152,6 +152,14 @@ class ListingController extends Controller
             ->with('success', 'Listing deleted.');
     }
 
+    public function paymentSuccess(Request $request, string $id): View
+    {
+        $listing = PropertyListing::forUser(auth()->user())
+            ->findOrFail($id);
+
+        return view('pages.agent.listings.payment-success', compact('listing'));
+    }
+
     public function analytics(string $id): View
     {
         $listing = PropertyListing::forUser(auth()->user())

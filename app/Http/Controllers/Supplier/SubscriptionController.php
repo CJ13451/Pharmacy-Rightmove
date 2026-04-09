@@ -55,6 +55,22 @@ class SubscriptionController extends Controller
         ]);
     }
 
+    public function success(): View
+    {
+        $user = auth()->user();
+        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+
+        return view('pages.supplier.subscription.index', [
+            'supplier' => $supplier,
+            'tiers' => [
+                ['tier' => SupplierTier::FREE, 'price' => 0, 'features' => SupplierTier::FREE->features()],
+                ['tier' => SupplierTier::PREMIUM, 'price' => 4900, 'features' => SupplierTier::PREMIUM->features()],
+                ['tier' => SupplierTier::FEATURED, 'price' => 14900, 'features' => SupplierTier::FEATURED->features()],
+            ],
+            'subscriptionSuccess' => true,
+        ]);
+    }
+
     public function cancel()
     {
         $user = auth()->user();

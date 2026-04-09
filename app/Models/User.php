@@ -38,6 +38,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'newsletter_subscribed',
         
+        // Stripe
+        'stripe_customer_id',
+
         // Timestamps
         'last_login_at',
     ];

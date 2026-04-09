@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', $article->title . ' - Premium Content')
-
-@section('content')
+<x-layouts.app :title="$article->title . ' - Premium Content'">
 <div class="max-w-3xl mx-auto px-4 py-12">
     <div class="bg-white rounded-lg shadow-md p-8 text-center">
         <div class="mb-6">
@@ -21,18 +17,12 @@
 
         @guest
             <div class="flex justify-center gap-4">
-                <a href="{{ route('login') }}" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">
-                    Log In
-                </a>
-                <a href="{{ route('register') }}" class="inline-flex items-center px-6 py-3 border border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50">
-                    Create Account
-                </a>
+                <a href="{{ route('login') }}" class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">Log In</a>
+                <a href="{{ route('register') }}" class="inline-flex items-center px-6 py-3 border border-green-600 text-green-600 font-semibold rounded-lg hover:bg-green-50">Create Account</a>
             </div>
         @endguest
 
-        <a href="{{ route('news.index') }}" class="inline-block mt-6 text-sm text-gray-500 hover:text-gray-700">
-            &larr; Back to News
-        </a>
+        <a href="{{ route('news.index') }}" class="inline-block mt-6 text-sm text-gray-500 hover:text-gray-700">&larr; Back to News</a>
     </div>
 </div>
-@endsection
+</x-layouts.app>

@@ -127,6 +127,7 @@ Route::middleware(['auth'])->group(function () {
         // Saved Searches
         Route::get('/saved-searches', [\App\Http\Controllers\SavedSearchController::class, 'index'])->name('saved-searches.index');
         Route::post('/saved-searches', [\App\Http\Controllers\SavedSearchController::class, 'store'])->name('saved-searches.store');
+        Route::patch('/saved-searches/{id}/toggle-alerts', [\App\Http\Controllers\SavedSearchController::class, 'toggleAlerts'])->name('saved-searches.toggle-alerts');
         Route::delete('/saved-searches/{id}', [\App\Http\Controllers\SavedSearchController::class, 'destroy'])->name('saved-searches.destroy');
         
     });
@@ -165,7 +166,10 @@ Route::middleware(['auth', 'verified', 'can:manage-supplier-profile'])->prefix('
     Route::get('/profile', [\App\Http\Controllers\Supplier\ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [\App\Http\Controllers\Supplier\ProfileController::class, 'update'])->name('profile.update');
     Route::get('/resources', [\App\Http\Controllers\Supplier\ResourceController::class, 'index'])->name('resources.index');
+    Route::post('/resources', [\App\Http\Controllers\Supplier\ResourceController::class, 'store'])->name('resources.store');
+    Route::delete('/resources/{id}', [\App\Http\Controllers\Supplier\ResourceController::class, 'destroy'])->name('resources.destroy');
     Route::get('/subscription', [\App\Http\Controllers\Supplier\SubscriptionController::class, 'index'])->name('subscription.index');
+    Route::post('/subscription/upgrade', [\App\Http\Controllers\Supplier\SubscriptionController::class, 'upgrade'])->name('subscription.upgrade');
     Route::get('/subscription/success', [\App\Http\Controllers\Supplier\SubscriptionController::class, 'success'])->name('subscription.success');
     Route::post('/subscription/cancel', [\App\Http\Controllers\Supplier\SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 });

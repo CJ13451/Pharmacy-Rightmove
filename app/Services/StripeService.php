@@ -187,7 +187,7 @@ class StripeService
             $course->enrolments()->firstOrCreate([
                 'user_id' => $user->id,
             ], [
-                'status' => 'active',
+                'status' => 'enrolled',
                 'enrolled_at' => now(),
             ]);
         }

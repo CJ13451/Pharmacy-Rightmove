@@ -36,4 +36,49 @@ class EnquiryController extends Controller
 
         return view('pages.agent.enquiries.index', compact('enquiries'));
     }
+
+    public function show(string $id): View
+    {
+        $user = auth()->user();
+
+        $enquiry = Enquiry::whereHas('listing', function ($q) use ($user) {
+            $q->where('user_id', $user->id);
+        })->with(['listing', 'user'])->findOrFail($id);
+
+        if ($enquiry->status === 'new') {
+            $enquiry->update(['status' => 'read']);
+        }
+
+        return view('pages.agent.enquiries.show', compact('enquiry'));
+    }
+
+    public function reply(Request $request, string $id)
+    {
+        $user = auth()->user();
+
+        $enquiry = Enquiry::whereHas('listing', function ($q) use ($user) {
+            $q->where('user_id', $user->id);
+        })->findOrFail($id);
+
+        $validated = $request->validate([
+            'message' => ['required', 'string', 'max:2000'],
+        ]);
+
+        $enquiry->reply($validated['message']);
+
+        return back()->with('success', 'Reply sent.');
+    }
+
+    public function archive(string $id)
+    {
+        $user = auth()->user();
+
+        $enquiry = Enquiry::whereHas('listing', function ($q) use ($user) {
+            $q->where('user_id', $user->id);
+        })->findOrFail($id);
+
+        $enquiry->archive();
+
+        return back()->with('success', 'Enquiry archived.');
+    }
 }
