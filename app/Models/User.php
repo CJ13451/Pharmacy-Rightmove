@@ -5,13 +5,15 @@ namespace App\Models;
 use App\Enums\BuyTimeframe;
 use App\Enums\JobTitle;
 use App\Enums\UserRole;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     use HasFactory, HasUuids, Notifiable;
 
@@ -82,6 +84,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return strtoupper(
             substr($this->first_name, 0, 1) . substr($this->last_name, 0, 1)
         );
+    }
+
+    // ----- Filament -----
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->isContentEditor();
     }
 
     // ----- Role Helpers -----
