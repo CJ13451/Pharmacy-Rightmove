@@ -12,32 +12,15 @@ class DotdigitalService
     protected string $username;
     protected string $password;
 
-    // Address book IDs from Dotdigital
-    protected const ADDRESS_BOOKS = [
-        'newsletter' => 'NEWSLETTER_ADDRESS_BOOK_ID',
-        'buyers' => 'BUYERS_ADDRESS_BOOK_ID',
-        'agents' => 'AGENTS_ADDRESS_BOOK_ID',
-        'suppliers' => 'SUPPLIERS_ADDRESS_BOOK_ID',
-    ];
+    protected function getAddressBookId(string $key): ?string
+    {
+        return config("services.dotdigital.address_books.{$key}");
+    }
 
-    // Campaign/Template IDs
-    protected const CAMPAIGNS = [
-        'welcome' => 'WELCOME_CAMPAIGN_ID',
-        'email_verification' => 'EMAIL_VERIFICATION_CAMPAIGN_ID',
-        'password_reset' => 'PASSWORD_RESET_CAMPAIGN_ID',
-        'new_listing_alert' => 'NEW_LISTING_ALERT_CAMPAIGN_ID',
-        'enquiry_received' => 'ENQUIRY_RECEIVED_CAMPAIGN_ID',
-        'enquiry_confirmation' => 'ENQUIRY_CONFIRMATION_CAMPAIGN_ID',
-        'course_purchase' => 'COURSE_PURCHASE_CAMPAIGN_ID',
-        'course_completion' => 'COURSE_COMPLETION_CAMPAIGN_ID',
-        'listing_published' => 'LISTING_PUBLISHED_CAMPAIGN_ID',
-        'listing_expiring' => 'LISTING_EXPIRING_CAMPAIGN_ID',
-        'subscription_welcome' => 'SUBSCRIPTION_WELCOME_CAMPAIGN_ID',
-        'subscription_renewal' => 'SUBSCRIPTION_RENEWAL_CAMPAIGN_ID',
-        'subscription_cancelled' => 'SUBSCRIPTION_CANCELLED_CAMPAIGN_ID',
-        'payment_failed' => 'PAYMENT_FAILED_CAMPAIGN_ID',
-        'weekly_newsletter' => 'WEEKLY_NEWSLETTER_CAMPAIGN_ID',
-    ];
+    protected function getCampaignId(string $key): ?string
+    {
+        return config("services.dotdigital.campaigns.{$key}");
+    }
 
     public function __construct()
     {
@@ -94,9 +77,9 @@ class DotdigitalService
      */
     public function sendTriggeredCampaign(string $campaignKey, string $email, array $personalization = []): bool
     {
-        $campaignId = self::CAMPAIGNS[$campaignKey] ?? null;
-        
-        if (!$campaignId || $campaignId === strtoupper($campaignKey) . '_CAMPAIGN_ID') {
+        $campaignId = $this->getCampaignId($campaignKey);
+
+        if (!$campaignId) {
             Log::warning('Campaign ID not configured', ['campaign' => $campaignKey]);
             return false;
         }
@@ -226,9 +209,9 @@ class DotdigitalService
      */
     public function addToAddressBook(string $email, string $bookKey): bool
     {
-        $bookId = self::ADDRESS_BOOKS[$bookKey] ?? null;
-        
-        if (!$bookId || strpos($bookId, '_ADDRESS_BOOK_ID') !== false) {
+        $bookId = $this->getAddressBookId($bookKey);
+
+        if (!$bookId) {
             Log::warning('Address book ID not configured', ['book' => $bookKey]);
             return false;
         }
@@ -253,8 +236,8 @@ class DotdigitalService
      */
     public function removeFromAddressBook(string $email, string $bookKey): bool
     {
-        $bookId = self::ADDRESS_BOOKS[$bookKey] ?? null;
-        
+        $bookId = $this->getAddressBookId($bookKey);
+
         if (!$bookId) {
             return false;
         }

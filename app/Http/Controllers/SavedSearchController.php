@@ -37,6 +37,19 @@ class SavedSearchController extends Controller
         return back()->with('success', 'Search saved successfully.');
     }
 
+    public function toggleAlerts(string $id)
+    {
+        $savedSearch = SavedSearch::where('user_id', auth()->id())
+            ->where('id', $id)
+            ->firstOrFail();
+
+        $savedSearch->update([
+            'email_alerts' => !$savedSearch->email_alerts,
+        ]);
+
+        return back()->with('success', $savedSearch->email_alerts ? 'Email alerts enabled.' : 'Email alerts disabled.');
+    }
+
     public function destroy(string $id)
     {
         $savedSearch = SavedSearch::where('user_id', auth()->id())
