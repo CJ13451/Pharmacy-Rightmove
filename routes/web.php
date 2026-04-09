@@ -20,7 +20,9 @@ Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name
 
 // Temporary seed route
 Route::get('/seed-db', function () {
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0');
     \App\Models\User::truncate();
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     // Create admin directly with DB insert to avoid any model interference
     \Illuminate\Support\Facades\DB::table('users')->insert([
