@@ -43,11 +43,10 @@ class SavedSearchController extends Controller
             ->where('id', $id)
             ->firstOrFail();
 
-        $savedSearch->update([
-            'email_alerts' => !$savedSearch->email_alerts,
-        ]);
+        $newValue = !$savedSearch->email_alerts;
+        $savedSearch->update(['email_alerts' => $newValue]);
 
-        return back()->with('success', $savedSearch->email_alerts ? 'Email alerts enabled.' : 'Email alerts disabled.');
+        return back()->with('success', $newValue ? 'Email alerts enabled.' : 'Email alerts disabled.');
     }
 
     public function destroy(string $id)
