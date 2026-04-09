@@ -18,11 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
-// Temporary seed route
+// Temporary setup route
 Route::get('/seed-db', function () {
     \App\Models\User::query()->delete();
 
-    // Create admin directly with DB insert to avoid any model interference
     \Illuminate\Support\Facades\DB::table('users')->insert([
         'id' => \Illuminate\Support\Str::uuid()->toString(),
         'email' => 'admin@p3pharmacy.co.uk',
@@ -39,11 +38,21 @@ Route::get('/seed-db', function () {
         'updated_at' => now(),
     ]);
 
+    // Publish Filament assets
+    try {
+        \Illuminate\Support\Facades\Artisan::call('filament:assets');
+    } catch (\Exception $e) {
+        // Try alternative
+        try {
+            \Illuminate\Support\Facades\Artisan::call('vendor:publish', ['--tag' => 'filament-assets', '--force' => true]);
+        } catch (\Exception $e2) {}
+    }
+
     $user = \App\Models\User::where('email', 'admin@p3pharmacy.co.uk')->first();
     $hash = $user->password;
     $valid = \Illuminate\Support\Facades\Hash::check('password', $hash);
 
-    return "Done. Hash starts with: " . substr($hash, 0, 7) . " | Verify: " . ($valid ? 'PASS' : 'FAIL') . " | Length: " . strlen($hash);
+    return "Done. Hash: " . ($valid ? 'PASS' : 'FAIL') . " | Filament assets published.";
 });
 
 /*
