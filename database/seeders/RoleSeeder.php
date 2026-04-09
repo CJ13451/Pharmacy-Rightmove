@@ -11,6 +11,12 @@ class RoleSeeder extends Seeder
 {
     public function run(): void
     {
+        // Skip if admin already exists
+        if (User::where('email', 'admin@p3pharmacy.co.uk')->exists()) {
+            $this->command?->info('Admin user already exists, skipping seeder.');
+            return;
+        }
+
         // Create admin user
         User::create([
             'email' => 'admin@p3pharmacy.co.uk',

@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
+// Temporary seed route - visit /seed-db once to create admin users, then remove this
+Route::get('/seed-db', function () {
+    if (\App\Models\User::count() > 0) {
+        return 'Database already seeded. Users exist.';
+    }
+    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--force' => true]);
+    return 'Seeded! Admin login: admin@p3pharmacy.co.uk / password';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes (No Auth Required)
