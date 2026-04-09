@@ -3,194 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P3 Pharmacy — Intelligence. Analysis. Insight.</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>P3 Pharmacy - Intelligence. Analysis. Insight.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #1a1a1a;
+            --grey-900: #111111;
+            --grey-800: #222222;
+            --grey-700: #444444;
+            --grey-600: #666666;
+            --grey-500: #888888;
+            --grey-400: #aaaaaa;
+            --grey-300: #cccccc;
+            --grey-200: #e0e0e0;
+            --grey-100: #f0f0f0;
+            --grey-50: #f8f8f8;
+            --white: #ffffff;
+            --green: #00875a;
+            --orange: #ff6b00;
+            --blue: #0066cc;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--white); color: var(--black); font-size: 15px; line-height: 1.6; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .header { border-bottom: 1px solid var(--grey-200); }
+        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--grey-100); }
+        .header-top-left { display: flex; gap: 24px; font-size: 13px; color: var(--grey-600); }
+        .header-top-left a { color: var(--grey-600); text-decoration: none; }
+        .header-top-left a:hover { color: var(--black); }
+        .header-top-right { display: flex; gap: 16px; align-items: center; }
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-family: inherit; font-size: 13px; font-weight: 600; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; transition: all 0.15s; }
+        .btn-text { background: none; color: var(--grey-700); padding: 8px 0; }
+        .btn-primary { background: var(--black); color: white; }
+        .btn-primary:hover { background: var(--grey-800); }
+        .header-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .logo { display: flex; flex-direction: column; }
+        .logo-main { display: flex; align-items: baseline; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -1px; color: var(--black); }
+        .logo-tagline { font-size: 11px; font-weight: 500; color: var(--grey-600); letter-spacing: 0.5px; margin-top: 2px; }
+        .header-url { font-size: 13px; color: var(--grey-500); }
+        .category-nav { display: flex; gap: 0; border-bottom: 3px solid var(--black); }
+        .category-nav a { padding: 12px 18px; font-size: 13px; font-weight: 600; color: var(--grey-700); text-decoration: none; transition: all 0.15s; position: relative; }
+        .category-nav a:hover { color: var(--black); background: var(--grey-50); }
+        .category-nav a.active { color: var(--black); }
+        .category-nav a.active::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: var(--green); }
+        .category-nav a.highlight { background: var(--green); color: white; }
+        .category-nav a.highlight:hover { background: #006644; }
+        .main-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; padding: 40px 0; }
+        .section { margin-bottom: 40px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--black); }
+        .section-title { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 800; color: var(--black); text-transform: uppercase; letter-spacing: 0.5px; }
+        .section-link { font-size: 13px; font-weight: 600; color: var(--green); text-decoration: none; }
+        .section-link:hover { text-decoration: underline; }
+        .featured-story { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--grey-200); margin-bottom: 32px; }
+        .featured-image { height: 300px; background: linear-gradient(135deg, #2a4a6a 0%, #1a3050 100%); }
+        .featured-content { display: flex; flex-direction: column; justify-content: center; }
+        .story-category { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 12px; }
+        .featured-content h2 { font-family: 'Newsreader', serif; font-size: 28px; font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+        .featured-content h2 a { color: var(--black); text-decoration: none; }
+        .featured-content h2 a:hover { color: var(--green); }
+        .story-excerpt { font-size: 15px; color: var(--grey-700); line-height: 1.6; margin-bottom: 16px; }
+        .story-meta { font-size: 13px; color: var(--grey-500); }
+        .news-list { display: flex; flex-direction: column; gap: 20px; }
+        .news-item { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--grey-100); text-decoration: none; }
+        .news-item:last-child { border-bottom: none; }
+        .news-thumb { height: 90px; background: var(--grey-100); }
+        .news-content .story-category { margin-bottom: 6px; }
+        .news-content h3 { font-family: 'Newsreader', serif; font-size: 17px; font-weight: 600; line-height: 1.35; margin-bottom: 6px; color: var(--black); }
+        .news-item:hover h3 { color: var(--green); }
+        .news-content .story-meta { font-size: 12px; }
+        .properties-section { background: var(--grey-50); padding: 28px; margin-bottom: 40px; border: 1px solid var(--grey-200); }
+        .properties-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .property-card { background: var(--white); border: 1px solid var(--grey-200); text-decoration: none; transition: all 0.15s; }
+        .property-card:hover { border-color: var(--black); }
+        .property-image { height: 110px; background: linear-gradient(135deg, #e8e4e0 0%, #d8d4d0 100%); position: relative; }
+        .property-badge { position: absolute; top: 8px; left: 8px; background: var(--green); color: white; padding: 2px 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+        .property-content { padding: 14px; }
+        .property-price { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+        .property-title { font-size: 13px; font-weight: 500; color: var(--grey-800); margin-bottom: 4px; line-height: 1.4; }
+        .property-location { font-size: 12px; color: var(--grey-500); }
+        .sidebar { display: flex; flex-direction: column; gap: 28px; }
+        .sidebar-section { border: 1px solid var(--grey-200); padding: 20px; }
+        .sidebar-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--black); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--black); }
+        .quick-tools { display: flex; flex-direction: column; gap: 10px; }
+        .quick-tool { display: flex; gap: 12px; padding: 12px; background: var(--grey-50); text-decoration: none; transition: background 0.15s; }
+        .quick-tool:hover { background: var(--grey-100); }
+        .quick-tool-icon { width: 36px; height: 36px; background: var(--white); border: 1px solid var(--grey-200); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .quick-tool-content h4 { font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 2px; }
+        .quick-tool-content p { font-size: 11px; color: var(--grey-500); }
+        .suppliers-widget { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .supplier-item { padding: 14px 10px; background: var(--grey-50); text-align: center; text-decoration: none; transition: background 0.15s; }
+        .supplier-item:hover { background: var(--grey-100); }
+        .supplier-item-logo { width: 36px; height: 36px; background: var(--white); border: 1px solid var(--grey-200); border-radius: 4px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--grey-400); }
+        .supplier-item-name { font-size: 11px; font-weight: 600; color: var(--black); }
+        .supplier-item-cat { font-size: 10px; color: var(--grey-500); }
+        .training-list { display: flex; flex-direction: column; gap: 14px; }
+        .training-item { display: flex; gap: 10px; text-decoration: none; }
+        .training-item:hover h4 { color: var(--green); }
+        .training-badge { padding: 3px 6px; background: var(--black); color: white; font-size: 9px; font-weight: 700; text-transform: uppercase; white-space: nowrap; height: fit-content; }
+        .training-item h4 { font-size: 13px; font-weight: 600; color: var(--black); line-height: 1.4; }
+        .training-item p { font-size: 11px; color: var(--grey-500); margin-top: 2px; }
+        .newsletter-widget { background: var(--black); padding: 20px; }
+        .newsletter-widget h3 { font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+        .newsletter-widget p { font-size: 13px; color: var(--grey-400); margin-bottom: 14px; }
+        .newsletter-widget input { width: 100%; padding: 10px 12px; border: 1px solid var(--grey-700); background: var(--grey-900); color: var(--white); font-family: inherit; font-size: 13px; margin-bottom: 10px; }
+        .newsletter-widget input::placeholder { color: var(--grey-500); }
+        .newsletter-widget button { width: 100%; padding: 10px; background: var(--white); color: var(--black); border: none; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .newsletter-widget button:hover { background: var(--grey-100); }
+        .resources-full { background: var(--grey-50); padding: 40px 0; border-top: 1px solid var(--grey-200); border-bottom: 1px solid var(--grey-200); }
+        .resources-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .resource-card { background: var(--white); border: 1px solid var(--grey-200); padding: 20px; text-decoration: none; transition: all 0.15s; }
+        .resource-card:hover { border-color: var(--black); }
+        .resource-icon { font-size: 24px; margin-bottom: 14px; }
+        .resource-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--grey-500); margin-bottom: 6px; }
+        .resource-title { font-size: 14px; font-weight: 700; color: var(--black); line-height: 1.4; margin-bottom: 6px; }
+        .resource-desc { font-size: 12px; color: var(--grey-600); }
+        .footer { background: var(--black); color: var(--white); padding: 56px 0 28px; }
+        .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--grey-700); }
+        .footer-brand .logo-main { font-size: 24px; color: var(--white); margin-bottom: 4px; }
+        .footer-brand .logo-tagline { color: var(--grey-400); margin-bottom: 12px; }
+        .footer-desc { font-size: 13px; color: var(--grey-400); line-height: 1.6; }
+        .footer-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey-400); margin-bottom: 14px; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 8px; }
+        .footer-col a { font-size: 13px; color: var(--grey-300); text-decoration: none; }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bottom { padding-top: 20px; display: flex; justify-content: space-between; font-size: 12px; color: var(--grey-500); }
+        .footer-bottom a { color: var(--grey-500); text-decoration: none; margin-left: 20px; }
+        .footer-bottom a:hover { color: var(--grey-300); }
+        @media (max-width: 768px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .featured-story { grid-template-columns: 1fr; }
+            .properties-grid { grid-template-columns: 1fr; }
+            .resources-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+            .category-nav { overflow-x: auto; }
+            .header-top { display: none; }
+        }
+    </style>
 </head>
-<body class="antialiased bg-white">
-    <!-- Header -->
-    <header class="absolute top-0 left-0 right-0 z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <a href="/" class="flex items-center gap-2">
-                    <span class="text-2xl font-bold text-white">p3<span class="text-green-400">pharmacy</span></span>
-                </a>
-                <div class="flex items-center gap-4">
-                    <a href="{{ route('login') }}" class="text-white/90 hover:text-white font-medium">Sign In</a>
-                    <a href="{{ route('register') }}" class="bg-white text-gray-900 px-5 py-2.5 rounded-lg font-semibold hover:bg-gray-100 transition">Register Free</a>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="header-top-left">
+                    <span>{{ now()->format('l, j F Y') }}</span>
+                    <a href="#">About</a>
+                    <a href="#">Advertise</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="header-top-right">
+                    @auth
+                        <a href="{{ route('home') }}" class="btn btn-text">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-text">Sign In</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary">Subscribe</a>
+                    @endauth
                 </div>
             </div>
-        </nav>
+            <div class="header-main">
+                <div class="logo">
+                    <div class="logo-main"><span class="logo-p3">p3</span><span class="logo-pharmacy">pharmacy</span></div>
+                    <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                </div>
+                <div class="header-url">p3pharmacy.co.uk</div>
+            </div>
+            <nav class="category-nav">
+                <a href="#" class="active">Home</a>
+                <a href="{{ route('login') }}">News</a>
+                <a href="{{ route('login') }}" class="highlight">Pharmacies for Sale</a>
+                <a href="{{ route('login') }}">Buying Guide</a>
+                <a href="{{ route('login') }}">Valuations</a>
+                <a href="{{ route('login') }}">Training</a>
+                <a href="{{ route('login') }}">Suppliers</a>
+                <a href="{{ route('login') }}">Resources</a>
+            </nav>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex items-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    <main>
+        <div class="container">
+            <div class="main-layout">
+                <div class="main-content">
+                    <div class="featured-story">
+                        <div class="featured-image"></div>
+                        <div class="featured-content">
+                            <div class="story-category">Market Analysis</div>
+                            <h2><a href="#">NHS funding settlement: Impact on pharmacy valuations and what buyers should expect in 2026-27</a></h2>
+                            <p class="story-excerpt">The new funding announcement has significant implications for pharmacy acquisition strategies. Our analysis covers valuation adjustments, regional variations, and negotiation considerations.</p>
+                            <div class="story-meta">By James Richardson &middot; {{ now()->format('j F Y') }}</div>
+                        </div>
+                    </div>
+
+                    <div class="properties-section">
+                        <div class="section-header" style="border: none; padding: 0; margin-bottom: 16px;">
+                            <h2 class="section-title">Pharmacies for Sale</h2>
+                            <a href="{{ route('login') }}" class="section-link">View all 847 &rarr;</a>
+                        </div>
+                        <div class="properties-grid">
+                            <a href="{{ route('login') }}" class="property-card">
+                                <div class="property-image"><span class="property-badge">Featured</span></div>
+                                <div class="property-content">
+                                    <div class="property-price">&pound;875,000</div>
+                                    <div class="property-title">High Street Pharmacy with 3-Bed Accommodation</div>
+                                    <div class="property-location">Kensington, London &middot; Freehold &middot; 8,500 items</div>
+                                </div>
+                            </a>
+                            <a href="{{ route('login') }}" class="property-card">
+                                <div class="property-image"></div>
+                                <div class="property-content">
+                                    <div class="property-price">&pound;425,000</div>
+                                    <div class="property-title">Village Pharmacy, Strong NHS Contract</div>
+                                    <div class="property-location">Didsbury, Manchester &middot; Leasehold &middot; 6,200 items</div>
+                                </div>
+                            </a>
+                            <a href="{{ route('login') }}" class="property-card">
+                                <div class="property-image"></div>
+                                <div class="property-content">
+                                    <div class="property-price">&pound;1,250,000</div>
+                                    <div class="property-title">Medical Centre Pharmacy, Multi-Site Group</div>
+                                    <div class="property-location">Clifton, Bristol &middot; Freehold &middot; 12,400 items</div>
+                                </div>
+                            </a>
+                            <a href="{{ route('login') }}" class="property-card">
+                                <div class="property-image"></div>
+                                <div class="property-content">
+                                    <div class="property-price">&pound;320,000</div>
+                                    <div class="property-title">Shopping Centre Unit, High Footfall</div>
+                                    <div class="property-location">Birmingham &middot; Leasehold &middot; 5,800 items</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <section class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Latest News</h2>
+                            <a href="{{ route('login') }}" class="section-link">All news &rarr;</a>
+                        </div>
+                        <div class="news-list">
+                            <a href="{{ route('login') }}" class="news-item">
+                                <div class="news-thumb"></div>
+                                <div class="news-content">
+                                    <div class="story-category">Policy</div>
+                                    <h3>PSNC publishes updated negotiation position for 2026-27</h3>
+                                    <div class="story-meta">8 April 2026 &middot; 4 min read</div>
+                                </div>
+                            </a>
+                            <a href="{{ route('login') }}" class="news-item">
+                                <div class="news-thumb"></div>
+                                <div class="news-content">
+                                    <div class="story-category">Market Report</div>
+                                    <h3>Q1 2026: Transaction volumes down 12% amid funding uncertainty</h3>
+                                    <div class="story-meta">5 April 2026 &middot; 6 min read</div>
+                                </div>
+                            </a>
+                            <a href="{{ route('login') }}" class="news-item">
+                                <div class="news-thumb"></div>
+                                <div class="news-content">
+                                    <div class="story-category">Regulation</div>
+                                    <h3>GPhC updates inspection framework: What new owners need to know</h3>
+                                    <div class="story-meta">3 April 2026 &middot; 5 min read</div>
+                                </div>
+                            </a>
+                            <a href="{{ route('login') }}" class="news-item">
+                                <div class="news-thumb"></div>
+                                <div class="news-content">
+                                    <div class="story-category">Analysis</div>
+                                    <h3>Independent prescribing: The commercial opportunity for pharmacy owners</h3>
+                                    <div class="story-meta">1 April 2026 &middot; 7 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Tools & Calculators</h3>
+                        <div class="quick-tools">
+                            <a href="{{ route('login') }}" class="quick-tool">
+                                <div class="quick-tool-icon">&#x1F4CA;</div>
+                                <div class="quick-tool-content"><h4>Valuation Calculator</h4><p>Estimate pharmacy values</p></div>
+                            </a>
+                            <a href="{{ route('login') }}" class="quick-tool">
+                                <div class="quick-tool-icon">&#x1F4CB;</div>
+                                <div class="quick-tool-content"><h4>Due Diligence Checklist</h4><p>Before you make an offer</p></div>
+                            </a>
+                            <a href="{{ route('login') }}" class="quick-tool">
+                                <div class="quick-tool-icon">&#x1F4C8;</div>
+                                <div class="quick-tool-content"><h4>Benchmarking Tool</h4><p>Compare your performance</p></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Training for Buyers</h3>
+                        <div class="training-list">
+                            <a href="{{ route('login') }}" class="training-item">
+                                <span class="training-badge">Course</span>
+                                <div><h4>Pre-Ownership Programme</h4><p>8 modules &middot; CPD accredited</p></div>
+                            </a>
+                            <a href="{{ route('login') }}" class="training-item">
+                                <span class="training-badge">Guide</span>
+                                <div><h4>The Complete Buying Guide</h4><p>Step-by-step walkthrough</p></div>
+                            </a>
+                            <a href="{{ route('login') }}" class="training-item">
+                                <span class="training-badge">Template</span>
+                                <div><h4>Business Plan Template</h4><p>Bank-ready format</p></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Supplier Directory</h3>
+                        <div class="suppliers-widget">
+                            <a href="{{ route('login') }}" class="supplier-item">
+                                <div class="supplier-item-logo">AAH</div>
+                                <div class="supplier-item-name">AAH</div>
+                                <div class="supplier-item-cat">Wholesaler</div>
+                            </a>
+                            <a href="{{ route('login') }}" class="supplier-item">
+                                <div class="supplier-item-logo">AH</div>
+                                <div class="supplier-item-name">Alliance</div>
+                                <div class="supplier-item-cat">Wholesaler</div>
+                            </a>
+                            <a href="{{ route('login') }}" class="supplier-item">
+                                <div class="supplier-item-logo">CG</div>
+                                <div class="supplier-item-name">Cegedim</div>
+                                <div class="supplier-item-cat">PMR</div>
+                            </a>
+                            <a href="{{ route('login') }}" class="supplier-item">
+                                <div class="supplier-item-logo">NM</div>
+                                <div class="supplier-item-name">Numark</div>
+                                <div class="supplier-item-cat">Buying Group</div>
+                            </a>
+                        </div>
+                        <a href="{{ route('login') }}" class="section-link" style="display: block; margin-top: 14px; text-align: center;">View all 240+ suppliers &rarr;</a>
+                    </div>
+
+                    <div class="newsletter-widget">
+                        <h3>Weekly Intelligence</h3>
+                        <p>Analysis & insights for pharmacy owners. Every Thursday.</p>
+                        <input type="email" placeholder="Your email">
+                        <button onclick="window.location.href='{{ route('register') }}'">Subscribe Free</button>
+                    </div>
+                </aside>
+            </div>
         </div>
-        
-        <!-- Green accent line -->
-        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-green-400 to-green-500"></div>
-        
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-            <div class="max-w-3xl">
-                <p class="text-green-400 font-semibold tracking-wide uppercase mb-4">The UK's Leading Pharmacy Trade Publication</p>
-                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-                    Intelligence.<br>
-                    Analysis.<br>
-                    <span class="text-green-400">Insight.</span>
-                </h1>
-                <p class="text-xl text-gray-300 mb-10 max-w-xl">
-                    Your essential resource for pharmacy ownership. Market intelligence, pharmacy sales, training, and supplier connections — all in one place.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('register') }}" class="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition shadow-lg shadow-green-500/25">
-                        Get Started Free
-                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                        </svg>
+
+        <section class="resources-full">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Resources & Guides</h2>
+                    <a href="{{ route('login') }}" class="section-link">View all &rarr;</a>
+                </div>
+                <div class="resources-grid">
+                    <a href="{{ route('login') }}" class="resource-card">
+                        <div class="resource-icon">&#x1F4CA;</div>
+                        <div class="resource-type">Tool</div>
+                        <h3 class="resource-title">Pharmacy Valuation Calculator</h3>
+                        <p class="resource-desc">Estimate value based on items, turnover, and market factors.</p>
                     </a>
-                    <a href="{{ route('login') }}" class="inline-flex items-center justify-center border-2 border-white/30 hover:border-white/50 text-white px-8 py-4 rounded-lg font-semibold text-lg transition">
-                        Sign In
+                    <a href="{{ route('login') }}" class="resource-card">
+                        <div class="resource-icon">&#x1F4CB;</div>
+                        <div class="resource-type">Checklist</div>
+                        <h3 class="resource-title">Due Diligence Checklist</h3>
+                        <p class="resource-desc">Everything to verify before making an offer.</p>
+                    </a>
+                    <a href="{{ route('login') }}" class="resource-card">
+                        <div class="resource-icon">&#x1F393;</div>
+                        <div class="resource-type">Course</div>
+                        <h3 class="resource-title">Pre-Ownership Programme</h3>
+                        <p class="resource-desc">8-module CPD course for prospective buyers.</p>
+                    </a>
+                    <a href="{{ route('login') }}" class="resource-card">
+                        <div class="resource-icon">&#x1F4DD;</div>
+                        <div class="resource-type">Template</div>
+                        <h3 class="resource-title">Business Plan Template</h3>
+                        <p class="resource-desc">Bank-ready template for acquisitions.</p>
                     </a>
                 </div>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <!-- Stats bar -->
-        <div class="absolute bottom-0 left-0 right-0 bg-black/30 backdrop-blur-sm border-t border-white/10">
-            <div class="max-w-7xl mx-auto px-4 py-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-white">500+</div>
-                        <div class="text-gray-400 text-sm">Articles Published</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-white">150+</div>
-                        <div class="text-gray-400 text-sm">Pharmacies Listed</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-white">50+</div>
-                        <div class="text-gray-400 text-sm">Training Courses</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-white">200+</div>
-                        <div class="text-gray-400 text-sm">Verified Suppliers</div>
-                    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo-main"><span class="logo-p3">p3</span><span class="logo-pharmacy">pharmacy</span></div>
+                    <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    <p class="footer-desc">The essential resource for UK pharmacy owners and prospective buyers.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Marketplace</h4>
+                    <ul>
+                        <li><a href="{{ route('login') }}">For Sale</a></li>
+                        <li><a href="{{ route('login') }}">To Let</a></li>
+                        <li><a href="{{ route('login') }}">Recently Sold</a></li>
+                        <li><a href="{{ route('login') }}">List Property</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="{{ route('login') }}">Buying Guide</a></li>
+                        <li><a href="{{ route('login') }}">Valuations</a></li>
+                        <li><a href="{{ route('login') }}">Training</a></li>
+                        <li><a href="{{ route('login') }}">Templates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Directory</h4>
+                    <ul>
+                        <li><a href="{{ route('login') }}">Wholesalers</a></li>
+                        <li><a href="{{ route('login') }}">PMR Systems</a></li>
+                        <li><a href="{{ route('login') }}">Buying Groups</a></li>
+                        <li><a href="{{ route('login') }}">All Suppliers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Everything You Need</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">From market intelligence to pharmacy sales, training to supplier connections — P3 Pharmacy is your complete resource.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition">
-                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">News & Analysis</h3>
-                    <p class="text-gray-600">Expert coverage of pharmacy policy, market trends, and business insights to keep you ahead of the curve.</p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition">
-                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Pharmacies for Sale</h3>
-                    <p class="text-gray-600">The UK's most comprehensive marketplace for pharmacy businesses. Find your next opportunity or list your pharmacy.</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition">
-                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Training & CPD</h3>
-                    <p class="text-gray-600">Accredited courses for pharmacy professionals. Build your skills with expert-led training programmes.</p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition">
-                    <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Supplier Directory</h3>
-                    <p class="text-gray-600">Connect with verified suppliers across wholesalers, PMR systems, accountants, legal services, and more.</p>
-                </div>
-
-                <!-- Feature 5 -->
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition">
-                    <div class="w-14 h-14 bg-rose-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Guides & Templates</h3>
-                    <p class="text-gray-600">Practical resources for pharmacy ownership. Due diligence checklists, valuation guides, and business templates.</p>
-                </div>
-
-                <!-- Feature 6 -->
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition">
-                    <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Valuations</h3>
-                    <p class="text-gray-600">Understand what your pharmacy is worth. Market data and valuation insights to inform your decisions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-24 bg-gray-900">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to get started?</h2>
-            <p class="text-xl text-gray-400 mb-10">Join thousands of pharmacy professionals using P3 Pharmacy to stay informed, find opportunities, and grow their businesses.</p>
-            <a href="{{ route('register') }}" class="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white px-10 py-4 rounded-lg font-semibold text-lg transition shadow-lg shadow-green-500/25">
-                Create Your Free Account
-                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-400 py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <span class="text-xl font-bold text-white">p3<span class="text-green-500">pharmacy</span></span>
-                    <p class="text-sm mt-1">Intelligence. Analysis. Insight.</p>
-                </div>
-                <div class="flex gap-6 text-sm">
-                    <a href="{{ route('terms') }}" class="hover:text-white">Terms</a>
-                    <a href="{{ route('privacy') }}" class="hover:text-white">Privacy</a>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                &copy; {{ date('Y') }} P3 Pharmacy. All rights reserved.
+            <div class="footer-bottom">
+                <span>&copy; {{ date('Y') }} P3 Pharmacy. All rights reserved.</span>
+                <span>
+                    <a href="{{ route('privacy') }}">Privacy</a>
+                    <a href="{{ route('terms') }}">Terms</a>
+                    <a href="#">Cookies</a>
+                </span>
             </div>
         </div>
     </footer>
