@@ -61,9 +61,8 @@ Route::get('/seed-db', function () {
 |--------------------------------------------------------------------------
 */
 
-// Homepage (newspaper design - public)
+// Homepage (newspaper design - public, no auth required)
 Route::get('/', [HomeController::class, 'landing'])->name('landing');
-Route::get('/home', [HomeController::class, 'landing'])->name('home');
 
 // Authentication
 Route::middleware('guest')->group(function () {
@@ -112,6 +111,9 @@ Route::middleware(['auth'])->group(function () {
     */
     
     Route::middleware(['verified'])->group(function () {
+
+        // Home (authenticated dashboard)
+        Route::get('/home', [HomeController::class, 'home'])->name('home');
 
         // User Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

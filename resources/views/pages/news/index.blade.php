@@ -7,7 +7,7 @@
                 <div class="featured-story">
                     <div class="featured-image"></div>
                     <div class="featured-content">
-                        <div class="story-category">{{ $featured->type->label() }}</div>
+                        <div class="story-category">{{ $featured->type?->label() ?? 'News' }}</div>
                         <h2><a href="{{ route('news.show', $featured->slug) }}">{{ $featured->title }}</a></h2>
                         <p class="story-excerpt">{{ Str::limit($featured->excerpt, 160) }}</p>
                         <div class="story-meta">{{ $featured->formatted_date }} &middot; {{ $featured->reading_time_minutes ?? 4 }} min read</div>
@@ -23,7 +23,7 @@
                     @forelse($articles as $article)
                         <a href="{{ route('news.show', $article->slug) }}" class="news-card">
                             <div class="news-card-image"></div>
-                            <div class="story-category">{{ $article->type->label() }}</div>
+                            <div class="story-category">{{ $article->type?->label() ?? 'News' }}</div>
                             <h3>{{ $article->title }}</h3>
                             <div class="story-meta">{{ $article->formatted_date }} &middot; {{ $article->reading_time_minutes ?? 4 }} min read</div>
                         </a>

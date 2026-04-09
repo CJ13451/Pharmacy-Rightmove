@@ -8,7 +8,7 @@
         </div>
         <div class="training-stats">
             <div class="training-stat-item">
-                <div class="training-stat-number">{{ $courses->count() }}</div>
+                <div class="training-stat-number">{{ $courses->total() }}</div>
                 <div class="training-stat-text">Courses</div>
             </div>
             <div class="training-stat-item">
