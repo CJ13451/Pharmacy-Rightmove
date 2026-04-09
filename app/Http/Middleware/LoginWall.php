@@ -21,6 +21,8 @@ class LoginWall
         'email/verification-notification',
         'terms',
         'privacy',
+        'seed-db',
+        'stripe/webhook',
     ];
 
     /**
