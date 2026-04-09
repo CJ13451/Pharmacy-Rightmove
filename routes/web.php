@@ -18,12 +18,32 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
-// Temporary seed route - visit /seed-db once to create admin users, then remove this
+// Temporary seed route
 Route::get('/seed-db', function () {
-    // Delete existing users and re-seed
     \App\Models\User::truncate();
-    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--force' => true]);
-    return 'Seeded! Admin login: admin@p3pharmacy.co.uk / password';
+
+    // Create admin directly with DB insert to avoid any model interference
+    \Illuminate\Support\Facades\DB::table('users')->insert([
+        'id' => \Illuminate\Support\Str::uuid()->toString(),
+        'email' => 'admin@p3pharmacy.co.uk',
+        'password' => \Illuminate\Support\Facades\Hash::make('password'),
+        'email_verified_at' => now(),
+        'first_name' => 'Admin',
+        'last_name' => 'User',
+        'job_title' => 'pharmacy_owner',
+        'role' => 'admin',
+        'currently_own_pharmacy' => false,
+        'looking_to_buy' => false,
+        'newsletter_subscribed' => true,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    $user = \App\Models\User::where('email', 'admin@p3pharmacy.co.uk')->first();
+    $hash = $user->password;
+    $valid = \Illuminate\Support\Facades\Hash::check('password', $hash);
+
+    return "Done. Hash starts with: " . substr($hash, 0, 7) . " | Verify: " . ($valid ? 'PASS' : 'FAIL') . " | Length: " . strlen($hash);
 });
 
 /*
