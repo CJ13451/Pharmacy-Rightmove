@@ -56,7 +56,6 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
             'job_title' => JobTitle::class,
             'buy_timeframe' => BuyTimeframe::class,
             'role' => UserRole::class,
