@@ -1,11 +1,11 @@
 <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <a href="/" class="flex justify-center items-center gap-3">
-            <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-12 w-auto">
-            <span class="text-left leading-tight">
+        <a href="/" class="flex justify-center items-center gap-4">
+            <span class="text-right leading-tight">
                 <span class="block text-xl font-serif font-bold text-gray-900">Pharmacy Owner</span>
-                <span class="block text-xs font-medium text-gray-500">by P3</span>
+                <span class="block text-base font-serif italic font-bold text-green-600 mt-0.5">by P3</span>
             </span>
+            <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-14 w-auto">
         </a>
         <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">Create your account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">

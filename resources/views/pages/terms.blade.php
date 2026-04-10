@@ -11,8 +11,8 @@
     <header class="border-b border-gray-200">
         <nav class="max-w-4xl mx-auto px-4 py-4">
             <a href="/" class="inline-flex items-center gap-3 text-gray-900">
-                <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-10 w-auto">
-                <span class="font-serif font-bold text-lg leading-tight">Pharmacy Owner<br><span class="text-xs font-medium text-gray-500">by P3</span></span>
+                <span class="font-serif font-bold text-lg leading-tight text-right">Pharmacy Owner<br><span class="text-sm font-serif italic font-bold text-green-600">by P3</span></span>
+                <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-12 w-auto">
             </a>
         </nav>
     </header>

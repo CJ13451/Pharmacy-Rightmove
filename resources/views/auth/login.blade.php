@@ -8,11 +8,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, sans-serif; background: #f8f8f8; color: #1a1a1a; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
-        .login-logo { font-family: 'Newsreader', serif; font-weight: 800; font-size: 26px; letter-spacing: -0.5px; text-decoration: none; color: #1a1a1a; display: block; text-align: center; line-height: 1.1; }
+        .login-logo { font-family: 'Newsreader', serif; font-weight: 800; font-size: 26px; letter-spacing: -0.5px; text-decoration: none; color: #1a1a1a; display: block; line-height: 1; }
         .login-tagline { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.5px; text-align: center; margin-bottom: 32px; }
-        .login-lockup { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px; text-decoration: none; }
-        .login-lockup img { height: 56px; width: auto; display: block; }
-        .login-lockup-text { text-align: left; }
+        .login-lockup { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 8px; text-decoration: none; }
+        .login-lockup img { height: 60px; width: auto; display: block; order: 2; }
+        .login-lockup-text { display: flex; flex-direction: column; line-height: 1.1; text-align: right; order: 1; }
+        .login-lockup-text .login-by { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 16px; color: #00875a; margin-top: 3px; }
         .login-box { background: #fff; border: 1px solid #e0e0e0; padding: 32px; width: 100%; max-width: 400px; }
         .login-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
         .login-subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
@@ -36,11 +37,11 @@
 </head>
 <body>
     <a href="/" class="login-lockup">
-        <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
         <span class="login-lockup-text">
             <span class="login-logo">Pharmacy Owner</span>
-            <span style="font-size:11px;font-weight:500;color:#888;letter-spacing:0.5px;">by P3</span>
+            <span class="login-by">by P3</span>
         </span>
+        <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
     </a>
     <div class="login-tagline">Intelligence. Analysis. Insight.</div>
 
