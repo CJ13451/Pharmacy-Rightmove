@@ -1,6 +1,6 @@
 <x-layouts.app title="Supplier Profile">
-<div class="max-w-3xl mx-auto px-4 py-12">
-    <div class="bg-white rounded-lg shadow-md p-8 text-center">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8 text-center">
         <div class="mb-6">
             <svg class="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />

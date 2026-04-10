@@ -1,5 +1,5 @@
 <x-layouts.app title="Listing Analytics">
-<div class="max-w-5xl mx-auto px-4 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-8">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">Analytics</h1>

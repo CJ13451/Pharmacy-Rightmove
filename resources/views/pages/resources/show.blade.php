@@ -1,5 +1,6 @@
 <x-layouts.app :title="$resource->title">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-4xl mx-auto">
         <!-- Breadcrumb -->
         <nav class="mb-6 text-sm">
             <ol class="flex items-center gap-2">
@@ -103,5 +104,6 @@
                 </div>
             </section>
         @endif
+    </div>
     </div>
 </x-layouts.app>

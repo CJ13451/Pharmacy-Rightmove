@@ -1,5 +1,5 @@
 <x-layouts.app title="Saved Searches">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-2xl font-bold text-gray-900">Saved Searches</h1>
             <a href="{{ route('listings.index') }}" class="text-green-600 hover:text-green-700 font-medium">

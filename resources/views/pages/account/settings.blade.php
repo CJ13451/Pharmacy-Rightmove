@@ -9,7 +9,8 @@
             ->all();
     @endphp
 
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto"
          x-data="{
              jobTitle: '{{ old('job_title', $user->job_title?->value) }}',
              ownsPharmacy: {{ old('currently_own_pharmacy', $user->currently_own_pharmacy) ? 'true' : 'false' }},
@@ -244,5 +245,6 @@
                 Delete my account
             </button>
         </div>
+    </div>
     </div>
 </x-layouts.app>
