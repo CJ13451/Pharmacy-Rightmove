@@ -73,7 +73,7 @@
                             <a href="{{ route('news.show', $article->slug) }}" style="display:grid;grid-template-columns:120px 1fr;gap:16px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--grey-100);text-decoration:none;">
                                 <div style="height:80px;background:var(--grey-100);"></div>
                                 <div>
-                                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:4px;">{{ $article->type->label() }}</div>
+                                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:4px;">{{ $article->type?->label() ?? 'News' }}</div>
                                     <div style="font-family:'Newsreader',serif;font-size:17px;font-weight:600;color:var(--black);line-height:1.35;">{{ $article->title }}</div>
                                     <div style="font-size:12px;color:var(--grey-500);margin-top:4px;">{{ $article->formatted_date }}</div>
                                 </div>

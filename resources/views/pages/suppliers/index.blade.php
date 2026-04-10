@@ -25,7 +25,7 @@
             <a href="{{ route('suppliers.show', $supplier->slug) }}" class="supplier-card {{ $supplier->is_featured ? 'featured' : '' }}">
                 <div class="supplier-logo">{{ strtoupper(substr($supplier->name, 0, 2)) }}</div>
                 <h3 class="supplier-name">{{ $supplier->name }}</h3>
-                <div class="supplier-category">{{ $supplier->category->label() }}</div>
+                <div class="supplier-category">{{ $supplier->category?->label() ?? '' }}</div>
                 <p class="supplier-desc">{{ Str::limit($supplier->short_description, 80) }}</p>
             </a>
         @empty

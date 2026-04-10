@@ -61,9 +61,8 @@ Route::get('/seed-db', function () {
 |--------------------------------------------------------------------------
 */
 
-// Homepage (newspaper design - public)
+// Homepage (newspaper design - public, no auth required)
 Route::get('/', [HomeController::class, 'landing'])->name('landing');
-Route::get('/home', [HomeController::class, 'landing'])->name('home');
 
 // Authentication
 Route::middleware('guest')->group(function () {
@@ -113,6 +112,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['verified'])->group(function () {
 
+        // Home (authenticated dashboard)
+        Route::get('/home', [HomeController::class, 'home'])->name('home');
+
         // User Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         
@@ -129,7 +131,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pharmacies-for-sale', [\App\Http\Controllers\ListingController::class, 'index'])->name('listings.index');
         Route::get('/pharmacies-for-sale/{slug}', [\App\Http\Controllers\ListingController::class, 'show'])->name('listings.show');
         Route::post('/pharmacies-for-sale/{slug}/enquire', [\App\Http\Controllers\ListingController::class, 'enquire'])->name('listings.enquire');
-        Route::post('/pharmacies-for-sale/{slug}/save', [\App\Http\Controllers\ListingController::class, 'toggleSave'])->name('listings.save');
+
         
         // Training
         Route::get('/training', [\App\Http\Controllers\TrainingController::class, 'index'])->name('training.index');

@@ -13,7 +13,6 @@ class LoginWall
      */
     protected array $publicRoutes = [
         '/',
-        'home',
         'login',
         'register',
         'forgot-password',
@@ -73,7 +72,7 @@ class LoginWall
 
         // Wildcard match
         if (str_ends_with($pattern, '/*')) {
-            $prefix = rtrim($pattern, '/*');
+            $prefix = substr($pattern, 0, -2);
             return str_starts_with($path, $prefix);
         }
 

@@ -47,7 +47,7 @@ class StripeService
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('training.purchase-success', ['course' => $course->slug]) . '?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => route('training.purchase-success', ['slug' => $course->slug]) . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('training.show', $course->slug),
             'metadata' => [
                 'type' => 'course_purchase',
@@ -82,7 +82,7 @@ class StripeService
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('agent.listings.payment-success', ['listing' => $listing->id]) . '?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => route('agent.listings.payment-success', ['id' => $listing->id]) . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('agent.listings.edit', $listing->id),
             'metadata' => [
                 'type' => 'listing_payment',
@@ -170,26 +170,19 @@ class StripeService
         $courseId = $session->metadata->course_id;
         $userId = $session->metadata->user_id;
 
-        CoursePurchase::create([
-            'user_id' => $userId,
-            'course_id' => $courseId,
-            'amount' => $session->amount_total,
-            'stripe_payment_intent_id' => $session->payment_intent,
-            'status' => 'completed',
-            'purchased_at' => now(),
-        ]);
+        // Idempotent: use firstOrCreate to handle webhook retries
+        $purchase = CoursePurchase::firstOrCreate(
+            ['user_id' => $userId, 'course_id' => $courseId],
+            [
+                'amount' => $session->amount_total,
+                'stripe_payment_intent_id' => $session->payment_intent,
+                'status' => 'pending',
+            ]
+        );
 
-        // Create enrolment
-        $course = Course::find($courseId);
-        $user = User::find($userId);
-        
-        if ($course && $user) {
-            $course->enrolments()->firstOrCreate([
-                'user_id' => $user->id,
-            ], [
-                'status' => 'enrolled',
-                'enrolled_at' => now(),
-            ]);
+        // Only complete if not already completed
+        if ($purchase->status !== 'completed') {
+            $purchase->markAsCompleted();
         }
 
         Log::info('Course purchase completed', ['course_id' => $courseId, 'user_id' => $userId]);
