@@ -26,6 +26,7 @@ class LoginWall
         'admin',
         'admin/*',
         'livewire/*',
+        'storage/*',
     ];
 
     /**

@@ -18,6 +18,32 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
+/*
+|--------------------------------------------------------------------------
+| Public Storage Fallback
+|--------------------------------------------------------------------------
+| Serves files stored on the `public` disk directly through the framework
+| so the app works even when `php artisan storage:link` has not been run
+| on the deployment host (e.g. Railway's ephemeral build step). This is
+| what backs every `Storage::disk('public')->url(...)` call, including
+| SCORM package assets, course thumbnails and Filament file uploads.
+*/
+Route::get('/storage/{path}', function (string $path) {
+    if (str_contains($path, '..')) {
+        abort(404);
+    }
+
+    $absolute = storage_path('app/public/'.$path);
+
+    if (! is_file($absolute)) {
+        abort(404);
+    }
+
+    return response()->file($absolute, [
+        'Cache-Control' => 'public, max-age=31536000',
+    ]);
+})->where('path', '.*')->name('storage.public');
+
 // Temporary setup route
 Route::get('/seed-db', function () {
     \App\Models\User::query()->delete();
