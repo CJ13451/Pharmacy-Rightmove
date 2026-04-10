@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\PropertyListing;
 use App\Models\Course;
+use App\Models\PropertyListing;
+use App\Models\Resource;
+use App\Models\Supplier;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -14,7 +16,60 @@ class HomeController extends Controller
      */
     public function landing(): View
     {
-        return view('pages.landing');
+        $featuredArticle = Article::published()
+            ->featured()
+            ->with('author')
+            ->latest('published_at')
+            ->first()
+            ?? Article::published()->with('author')->latest('published_at')->first();
+
+        $latestArticles = Article::published()
+            ->with('author')
+            ->when($featuredArticle, fn ($q) => $q->where('id', '!=', $featuredArticle->id))
+            ->latest('published_at')
+            ->limit(4)
+            ->get();
+
+        $featuredListings = PropertyListing::active()
+            ->featured()
+            ->latest('published_at')
+            ->limit(4)
+            ->get();
+
+        if ($featuredListings->count() < 4) {
+            $featuredListings = PropertyListing::active()
+                ->orderByDesc('featured')
+                ->latest('published_at')
+                ->limit(4)
+                ->get();
+        }
+
+        $featuredCourses = Course::published()
+            ->orderByDesc('enrolments_count')
+            ->limit(3)
+            ->get();
+
+        $directorySuppliers = Supplier::active()
+            ->orderByTier()
+            ->limit(4)
+            ->get();
+
+        $totalSuppliers = Supplier::active()->count();
+
+        $featuredResources = Resource::published()
+            ->orderByDesc('download_count')
+            ->limit(4)
+            ->get();
+
+        return view('pages.landing', compact(
+            'featuredArticle',
+            'latestArticles',
+            'featuredListings',
+            'featuredCourses',
+            'directorySuppliers',
+            'totalSuppliers',
+            'featuredResources'
+        ));
     }
 
     /**

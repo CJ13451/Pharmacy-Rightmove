@@ -30,11 +30,39 @@
         .logo-tagline { font-size: 11px; font-weight: 500; color: var(--grey-600); letter-spacing: 0.5px; margin-top: 2px; }
 
         /* Nav */
-        .category-nav { display: flex; gap: 0; border-bottom: 3px solid var(--black); overflow-x: auto; }
-        .category-nav a { padding: 12px 18px; font-size: 13px; font-weight: 600; color: var(--grey-700); text-decoration: none; transition: all 0.15s; position: relative; white-space: nowrap; }
+        .category-nav {
+            display: flex;
+            gap: 0;
+            /* Paint the bottom rule as a background so nothing needs to
+               overflow the box. Setting overflow-x: auto alone forces the
+               browser to upgrade overflow-y to auto too, which combined
+               with anything sticking below the content area would show a
+               vertical scrollbar. */
+            background: linear-gradient(to bottom, transparent calc(100% - 3px), var(--black) calc(100% - 3px));
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;    /* Firefox */
+            -ms-overflow-style: none; /* legacy Edge / IE */
+        }
+        .category-nav::-webkit-scrollbar { display: none; } /* Chrome / Safari */
+        .category-nav a {
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--grey-700);
+            text-decoration: none;
+            transition: all 0.15s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
         .category-nav a:hover { color: var(--black); background: var(--grey-50); }
-        .category-nav a.active { color: var(--black); }
-        .category-nav a.active::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: var(--green); }
+        .category-nav a.active {
+            color: var(--black);
+            /* Inset shadow draws the green indicator inside the anchor's
+               box so it isn't clipped by overflow-y: hidden. */
+            box-shadow: inset 0 -3px 0 var(--green);
+        }
         .category-nav a.highlight { background: var(--green); color: white; }
         .category-nav a.highlight:hover { background: #006644; }
 
@@ -289,6 +317,7 @@
             .grid-sidebar { grid-template-columns: 1fr; }
             .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
             .header-top { display: none; }
+            .category-nav a { padding: 10px 12px; font-size: 12px; }
         }
     </style>
 </head>
