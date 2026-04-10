@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Enquiry;
+use App\Models\PropertyListing;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -34,7 +35,13 @@ class EnquiryController extends Controller
             ->where('status', 'new')
             ->update(['status' => 'read']);
 
-        return view('pages.agent.enquiries.index', compact('enquiries'));
+        // The index view renders a "filter by listing" dropdown populated
+        // from the agent's own listings.
+        $listings = PropertyListing::forUser($user)
+            ->orderBy('title')
+            ->get(['id', 'title']);
+
+        return view('pages.agent.enquiries.index', compact('enquiries', 'listings'));
     }
 
     public function show(string $id): View

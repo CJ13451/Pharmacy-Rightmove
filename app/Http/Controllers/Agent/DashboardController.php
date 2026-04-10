@@ -31,7 +31,7 @@ class DashboardController extends Controller
             'active_listings' => PropertyListing::forUser($user)->active()->count(),
             'total_views' => PropertyListing::forUser($user)->sum('views_count'),
             'total_enquiries' => PropertyListing::forUser($user)->sum('enquiries_count'),
-            'unread_enquiries' => Enquiry::whereHas('listing', function ($q) use ($user) {
+            'new_enquiries' => Enquiry::whereHas('listing', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             })->where('status', 'new')->count(),
         ];

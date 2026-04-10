@@ -10,10 +10,14 @@ use Illuminate\View\View;
 
 class ResourceController extends Controller
 {
-    public function index(): View
+    public function index()
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         // Check if supplier tier allows resources
         if (!$supplier->tier->canUploadResources()) {
@@ -28,7 +32,11 @@ class ResourceController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         if (!$supplier->tier->canUploadResources()) {
             abort(403, 'Your tier does not allow resource uploads.');
@@ -59,7 +67,11 @@ class ResourceController extends Controller
     public function destroy(string $id)
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         $resource = SupplierResource::where('supplier_id', $supplier->id)
             ->findOrFail($id);

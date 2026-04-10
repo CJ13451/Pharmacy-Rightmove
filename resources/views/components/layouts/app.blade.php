@@ -393,9 +393,9 @@
             <div class="header-top">
                 <div>
                     <span>{{ now()->format('l, j F Y') }}</span>
-                    <a href="#">About</a>
-                    <a href="#">Advertise</a>
-                    <a href="#">Contact</a>
+                    <a href="mailto:hello@pharmacyowner.co.uk?subject=About%20Pharmacy%20Owner%20by%20P3">About</a>
+                    <a href="mailto:hello@pharmacyowner.co.uk?subject=Advertising%20enquiry">Advertise</a>
+                    <a href="mailto:hello@pharmacyowner.co.uk?subject=General%20enquiry">Contact</a>
                 </div>
                 <div class="header-top-right">
                     @auth
@@ -515,8 +515,8 @@
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="mailto:hello@pharmacyowner.co.uk?subject=About%20Pharmacy%20Owner%20by%20P3">About</a></li>
+                        <li><a href="mailto:hello@pharmacyowner.co.uk?subject=General%20enquiry">Contact</a></li>
                         <li><a href="{{ route('terms') }}">Terms</a></li>
                         <li><a href="{{ route('privacy') }}">Privacy</a></li>
                     </ul>

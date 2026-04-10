@@ -10,10 +10,14 @@ use Illuminate\View\View;
 
 class SubscriptionController extends Controller
 {
-    public function index(): View
+    public function index()
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         $tiers = [
             [
@@ -43,22 +47,30 @@ class SubscriptionController extends Controller
         ]);
 
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         $tier = SupplierTier::from($validated['tier']);
 
-        // TODO: Create Stripe checkout session
-        // For now, redirect to a placeholder
-
-        return redirect()->route('supplier.subscription.checkout', [
-            'tier' => $tier->value,
-        ]);
+        // TODO: Create Stripe checkout session for $tier and redirect
+        // to the session URL. Until that's wired up, land the user back
+        // on the subscription page with a note so they don't hit a 404.
+        return redirect()
+            ->route('supplier.subscription.index')
+            ->with('info', "Upgrade to the {$tier->label()} plan is not yet self-serve. Please contact hello@pharmacyowner.co.uk and our team will activate it for you.");
     }
 
-    public function success(): View
+    public function success()
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         return view('pages.supplier.subscription.index', [
             'supplier' => $supplier,
@@ -74,7 +86,11 @@ class SubscriptionController extends Controller
     public function cancel()
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         if ($supplier->tier === SupplierTier::FREE) {
             return back()->with('error', 'No active subscription to cancel.');
