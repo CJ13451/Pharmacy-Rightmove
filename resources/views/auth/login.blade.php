@@ -8,12 +8,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, sans-serif; background: #f8f8f8; color: #1a1a1a; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
-        .login-logo { font-family: 'Newsreader', serif; font-weight: 800; font-size: 26px; letter-spacing: -0.5px; text-decoration: none; color: #1a1a1a; display: block; line-height: 1; }
-        .login-tagline { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.5px; text-align: center; margin-bottom: 32px; }
-        .login-lockup { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 8px; text-decoration: none; }
-        .login-lockup img { height: 60px; width: auto; display: block; order: 2; }
-        .login-lockup-text { display: flex; flex-direction: column; line-height: 1.1; text-align: right; order: 1; }
-        .login-lockup-text .login-by { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 16px; color: #00875a; margin-top: 3px; }
+        /* Brand lockup (grid so Pharmacy Owner and the tagline share exact width) */
+        .login-lockup { display: inline-grid; grid-template-columns: auto auto auto; grid-template-rows: auto auto; column-gap: 12px; row-gap: 6px; align-items: center; margin: 0 auto 28px; text-decoration: none; }
+        .login-logo { grid-column: 1; grid-row: 1; align-self: end; font-family: 'Newsreader', serif; font-weight: 800; font-size: 26px; letter-spacing: -0.5px; color: #1a1a1a; line-height: 1; white-space: nowrap; }
+        .login-by { grid-column: 2; grid-row: 1; align-self: end; font-family: 'Newsreader', serif; font-style: italic; font-weight: 600; font-size: 22px; color: #00875a; line-height: 1; }
+        .login-lockup img { grid-column: 3; grid-row: 1 / 3; height: 52px; width: auto; display: block; align-self: center; }
+        .login-lockup .login-tagline { grid-column: 1; grid-row: 2; display: flex; justify-content: space-between; font-size: 9px; font-weight: 600; color: #666; letter-spacing: 1px; text-transform: uppercase; margin: 0; text-align: left; }
         .login-box { background: #fff; border: 1px solid #e0e0e0; padding: 32px; width: 100%; max-width: 400px; }
         .login-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
         .login-subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
@@ -36,14 +36,14 @@
     </style>
 </head>
 <body>
-    <a href="/" class="login-lockup">
-        <span class="login-lockup-text">
+    <div style="text-align:center;">
+        <a href="/" class="login-lockup">
             <span class="login-logo">Pharmacy Owner</span>
-            <span class="login-by">by P3</span>
-        </span>
-        <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
-    </a>
-    <div class="login-tagline">Intelligence. Analysis. Insight.</div>
+            <span class="login-by">by</span>
+            <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
+            <span class="login-tagline"><span>Intelligence</span><span>&middot;</span><span>Analysis</span><span>&middot;</span><span>Insight</span></span>
+        </a>
+    </div>
 
     <div class="login-box">
         <h1 class="login-title">Sign In</h1>
