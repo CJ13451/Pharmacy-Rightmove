@@ -245,6 +245,9 @@
         .listing-card:hover { border-color: var(--black); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .listing-image { height: 180px; background: linear-gradient(135deg, #e8e4e0 0%, #d8d4d0 100%); position: relative; }
         .listing-image .badge { position: absolute; top: 12px; left: 12px; }
+        .agent-badge { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; background: var(--white); border: 2px solid var(--white); box-shadow: 0 2px 6px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .agent-badge img { width: 100%; height: 100%; object-fit: cover; }
+        .agent-badge .agent-initials { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; color: var(--green); letter-spacing: -0.2px; text-align: center; line-height: 1; }
         .listing-content { display: flex; flex-direction: column; justify-content: space-between; }
         .listing-price { font-size: 28px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
         .listing-price-qualifier { font-size: 12px; color: var(--grey-500); font-weight: 500; }

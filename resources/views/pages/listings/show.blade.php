@@ -28,6 +28,23 @@
                             <span class="bg-amber-400 text-amber-900 text-sm font-bold px-3 py-1.5 rounded">FEATURED</span>
                         </div>
                     @endif
+                    @php
+                        $agentName = $listing->agent_company ?: $listing->agent_name;
+                        $agentInitials = collect(preg_split('/\s+/', trim($agentName)))
+                            ->filter()
+                            ->take(2)
+                            ->map(fn ($w) => mb_strtoupper(mb_substr($w, 0, 1)))
+                            ->join('');
+                    @endphp
+                    <div class="absolute top-4 right-4 flex items-center gap-2 bg-white/95 backdrop-blur rounded-full pl-2 pr-4 py-2 shadow-lg" title="{{ $agentName }}">
+                        <div class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-green-600 font-extrabold text-xs">
+                            {{ $agentInitials ?: 'P3' }}
+                        </div>
+                        <div class="text-xs leading-tight">
+                            <div class="font-semibold text-gray-500 uppercase tracking-wide">Marketed by</div>
+                            <div class="font-bold text-gray-900">{{ \Illuminate\Support\Str::limit($agentName, 22) }}</div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Key Details -->

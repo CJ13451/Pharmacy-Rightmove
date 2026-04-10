@@ -53,6 +53,17 @@
                 <a href="{{ route('listings.show', $listing->slug) }}" class="listing-card">
                     <div class="listing-image">
                         @if($listing->featured)<span class="badge badge-green">Featured</span>@endif
+                        @php
+                            $agentName = $listing->agent_company ?: $listing->agent_name;
+                            $agentInitials = collect(preg_split('/\s+/', trim($agentName)))
+                                ->filter()
+                                ->take(2)
+                                ->map(fn ($word) => mb_strtoupper(mb_substr($word, 0, 1)))
+                                ->join('');
+                        @endphp
+                        <span class="agent-badge" title="{{ $agentName }}">
+                            <span class="agent-initials">{{ $agentInitials ?: 'P3' }}</span>
+                        </span>
                     </div>
                     <div class="listing-content">
                         <div>
