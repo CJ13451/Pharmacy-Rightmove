@@ -44,41 +44,68 @@ Route::get('/storage/{path}', function (string $path) {
     ]);
 })->where('path', '.*')->name('storage.public');
 
-// Temporary setup route
+// Temporary setup / demo data route. Idempotent: each seeder skips itself if
+// data already exists, so this can be safely hit repeatedly to top up demo
+// content on a fresh deployment. It never deletes existing records.
 Route::get('/seed-db', function () {
-    \App\Models\User::query()->delete();
+    $output = [];
 
-    \Illuminate\Support\Facades\DB::table('users')->insert([
-        'id' => \Illuminate\Support\Str::uuid()->toString(),
-        'email' => 'admin@p3pharmacy.co.uk',
-        'password' => \Illuminate\Support\Facades\Hash::make('password'),
-        'email_verified_at' => now(),
-        'first_name' => 'Admin',
-        'last_name' => 'User',
-        'job_title' => 'pharmacy_owner',
-        'role' => 'admin',
-        'currently_own_pharmacy' => false,
-        'looking_to_buy' => false,
-        'newsletter_subscribed' => true,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // Publish Filament assets
+    // Ensure schema is up to date (useful on a fresh Railway volume).
     try {
-        \Illuminate\Support\Facades\Artisan::call('filament:assets');
-    } catch (\Exception $e) {
-        // Try alternative
-        try {
-            \Illuminate\Support\Facades\Artisan::call('vendor:publish', ['--tag' => 'filament-assets', '--force' => true]);
-        } catch (\Exception $e2) {}
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $output[] = 'migrate: ok';
+    } catch (\Throwable $e) {
+        $output[] = 'migrate: '.$e->getMessage();
     }
 
-    $user = \App\Models\User::where('email', 'admin@p3pharmacy.co.uk')->first();
-    $hash = $user->password;
-    $valid = \Illuminate\Support\Facades\Hash::check('password', $hash);
+    // Run the full seeder stack (RoleSeeder + content seeders). Each seeder
+    // is idempotent and will skip if its table already contains rows.
+    try {
+        \Illuminate\Support\Facades\Artisan::call('db:seed', [
+            '--class' => \Database\Seeders\DatabaseSeeder::class,
+            '--force' => true,
+        ]);
+        $output[] = 'db:seed: ok';
+    } catch (\Throwable $e) {
+        $output[] = 'db:seed: '.$e->getMessage();
+    }
 
-    return "Done. Hash: " . ($valid ? 'PASS' : 'FAIL') . " | Filament assets published.";
+    // Publish Filament assets (belt-and-braces in case the committed copies
+    // are stale for the current Filament version).
+    try {
+        \Illuminate\Support\Facades\Artisan::call('filament:assets');
+        $output[] = 'filament:assets: ok';
+    } catch (\Throwable $e) {
+        $output[] = 'filament:assets: '.$e->getMessage();
+    }
+
+    // Ensure the public storage symlink exists (route-based fallback also
+    // covers this, but having the symlink is faster where available).
+    try {
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        $output[] = 'storage:link: ok';
+    } catch (\Throwable $e) {
+        $output[] = 'storage:link: '.$e->getMessage();
+    }
+
+    $counts = [
+        'users' => \App\Models\User::count(),
+        'articles' => \App\Models\Article::count(),
+        'listings' => \App\Models\PropertyListing::count(),
+        'suppliers' => \App\Models\Supplier::count(),
+        'courses' => \App\Models\Course::count(),
+        'resources' => \App\Models\Resource::count(),
+    ];
+
+    return response()->json([
+        'steps' => $output,
+        'counts' => $counts,
+        'login' => [
+            'admin' => 'admin@p3pharmacy.co.uk / password',
+            'editor' => 'editor@p3pharmacy.co.uk / password',
+            'agent' => 'agent@p3pharmacy.co.uk / password',
+        ],
+    ], 200, [], JSON_PRETTY_PRINT);
 });
 
 /*

@@ -191,97 +191,69 @@
         <div class="container">
             <div class="main-layout">
                 <div class="main-content">
-                    <div class="featured-story">
-                        <div class="featured-image"></div>
-                        <div class="featured-content">
-                            <div class="story-category">Market Analysis</div>
-                            <h2><a href="{{ route('news.index') }}">NHS funding settlement: Impact on pharmacy valuations and what buyers should expect in 2026-27</a></h2>
-                            <p class="story-excerpt">The new funding announcement has significant implications for pharmacy acquisition strategies. Our analysis covers valuation adjustments, regional variations, and negotiation considerations.</p>
-                            <div class="story-meta">By James Richardson &middot; {{ now()->format('j F Y') }}</div>
+                    @if($featuredArticle)
+                        <div class="featured-story">
+                            <div class="featured-image"></div>
+                            <div class="featured-content">
+                                <div class="story-category">{{ $featuredArticle->category->label() }}</div>
+                                <h2><a href="{{ route('news.show', $featuredArticle->slug) }}">{{ $featuredArticle->title }}</a></h2>
+                                <p class="story-excerpt">{{ $featuredArticle->excerpt_or_truncated }}</p>
+                                <div class="story-meta">By {{ $featuredArticle->author_name }} &middot; {{ $featuredArticle->formatted_date }}</div>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
-                    <div class="properties-section">
-                        <div class="section-header" style="border: none; padding: 0; margin-bottom: 16px;">
-                            <h2 class="section-title">Pharmacies for Sale</h2>
-                            <a href="{{ route('listings.index') }}" class="section-link">View all &rarr;</a>
+                    @if($featuredListings->isNotEmpty())
+                        <div class="properties-section">
+                            <div class="section-header" style="border: none; padding: 0; margin-bottom: 16px;">
+                                <h2 class="section-title">Pharmacies for Sale</h2>
+                                <a href="{{ route('listings.index') }}" class="section-link">View all &rarr;</a>
+                            </div>
+                            <div class="properties-grid">
+                                @foreach($featuredListings as $listing)
+                                    <a href="{{ route('listings.show', $listing->slug) }}" class="property-card">
+                                        <div class="property-image">
+                                            @if($listing->featured)
+                                                <span class="property-badge">Featured</span>
+                                            @endif
+                                        </div>
+                                        <div class="property-content">
+                                            <div class="property-price">{{ $listing->formatted_price }}</div>
+                                            <div class="property-title">{{ $listing->title }}</div>
+                                            <div class="property-location">
+                                                {{ $listing->town }}@if($listing->county), {{ $listing->county }}@endif
+                                                &middot; {{ \Illuminate\Support\Str::title(str_replace('_', ' ', $listing->property_type)) }}
+                                                @if($listing->monthly_items)
+                                                    &middot; {{ number_format($listing->monthly_items) }} items
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="properties-grid">
-                            <a href="{{ route('listings.index') }}" class="property-card">
-                                <div class="property-image"><span class="property-badge">Featured</span></div>
-                                <div class="property-content">
-                                    <div class="property-price">&pound;875,000</div>
-                                    <div class="property-title">High Street Pharmacy with 3-Bed Accommodation</div>
-                                    <div class="property-location">Kensington, London &middot; Freehold &middot; 8,500 items</div>
-                                </div>
-                            </a>
-                            <a href="{{ route('listings.index') }}" class="property-card">
-                                <div class="property-image"></div>
-                                <div class="property-content">
-                                    <div class="property-price">&pound;425,000</div>
-                                    <div class="property-title">Village Pharmacy, Strong NHS Contract</div>
-                                    <div class="property-location">Didsbury, Manchester &middot; Leasehold &middot; 6,200 items</div>
-                                </div>
-                            </a>
-                            <a href="{{ route('listings.index') }}" class="property-card">
-                                <div class="property-image"></div>
-                                <div class="property-content">
-                                    <div class="property-price">&pound;1,250,000</div>
-                                    <div class="property-title">Medical Centre Pharmacy, Multi-Site Group</div>
-                                    <div class="property-location">Clifton, Bristol &middot; Freehold &middot; 12,400 items</div>
-                                </div>
-                            </a>
-                            <a href="{{ route('listings.index') }}" class="property-card">
-                                <div class="property-image"></div>
-                                <div class="property-content">
-                                    <div class="property-price">&pound;320,000</div>
-                                    <div class="property-title">Shopping Centre Unit, High Footfall</div>
-                                    <div class="property-location">Birmingham &middot; Leasehold &middot; 5,800 items</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    @endif
 
-                    <section class="section">
-                        <div class="section-header">
-                            <h2 class="section-title">Latest News</h2>
-                            <a href="{{ route('news.index') }}" class="section-link">All news &rarr;</a>
-                        </div>
-                        <div class="news-list">
-                            <a href="{{ route('news.index') }}" class="news-item">
-                                <div class="news-thumb"></div>
-                                <div class="news-content">
-                                    <div class="story-category">Policy</div>
-                                    <h3>PSNC publishes updated negotiation position for 2026-27</h3>
-                                    <div class="story-meta">8 April 2026 &middot; 4 min read</div>
-                                </div>
-                            </a>
-                            <a href="{{ route('news.index') }}" class="news-item">
-                                <div class="news-thumb"></div>
-                                <div class="news-content">
-                                    <div class="story-category">Market Report</div>
-                                    <h3>Q1 2026: Transaction volumes down 12% amid funding uncertainty</h3>
-                                    <div class="story-meta">5 April 2026 &middot; 6 min read</div>
-                                </div>
-                            </a>
-                            <a href="{{ route('news.index') }}" class="news-item">
-                                <div class="news-thumb"></div>
-                                <div class="news-content">
-                                    <div class="story-category">Regulation</div>
-                                    <h3>GPhC updates inspection framework: What new owners need to know</h3>
-                                    <div class="story-meta">3 April 2026 &middot; 5 min read</div>
-                                </div>
-                            </a>
-                            <a href="{{ route('news.index') }}" class="news-item">
-                                <div class="news-thumb"></div>
-                                <div class="news-content">
-                                    <div class="story-category">Analysis</div>
-                                    <h3>Independent prescribing: The commercial opportunity for pharmacy owners</h3>
-                                    <div class="story-meta">1 April 2026 &middot; 7 min read</div>
-                                </div>
-                            </a>
-                        </div>
-                    </section>
+                    @if($latestArticles->isNotEmpty())
+                        <section class="section">
+                            <div class="section-header">
+                                <h2 class="section-title">Latest News</h2>
+                                <a href="{{ route('news.index') }}" class="section-link">All news &rarr;</a>
+                            </div>
+                            <div class="news-list">
+                                @foreach($latestArticles as $article)
+                                    <a href="{{ route('news.show', $article->slug) }}" class="news-item">
+                                        <div class="news-thumb"></div>
+                                        <div class="news-content">
+                                            <div class="story-category">{{ $article->category->label() }}</div>
+                                            <h3>{{ $article->title }}</h3>
+                                            <div class="story-meta">{{ $article->formatted_date }} &middot; {{ $article->reading_time_minutes }} min read</div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </section>
+                    @endif
                 </div>
 
                 <aside class="sidebar">
@@ -303,50 +275,47 @@
                         </div>
                     </div>
 
-                    <div class="sidebar-section">
-                        <h3 class="sidebar-title">Training for Buyers</h3>
-                        <div class="training-list">
-                            <a href="{{ route('training.index') }}" class="training-item">
-                                <span class="training-badge">Course</span>
-                                <div><h4>Pre-Ownership Programme</h4><p>8 modules &middot; CPD accredited</p></div>
-                            </a>
-                            <a href="{{ route('training.index') }}" class="training-item">
-                                <span class="training-badge">Guide</span>
-                                <div><h4>The Complete Buying Guide</h4><p>Step-by-step walkthrough</p></div>
-                            </a>
-                            <a href="{{ route('training.index') }}" class="training-item">
-                                <span class="training-badge">Template</span>
-                                <div><h4>Business Plan Template</h4><p>Bank-ready format</p></div>
-                            </a>
+                    @if($featuredCourses->isNotEmpty())
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Training for Buyers</h3>
+                            <div class="training-list">
+                                @foreach($featuredCourses as $course)
+                                    <a href="{{ route('training.show', $course->slug) }}" class="training-item">
+                                        <span class="training-badge">{{ $course->cpd_accredited ? 'CPD' : 'Course' }}</span>
+                                        <div>
+                                            <h4>{{ $course->title }}</h4>
+                                            <p>
+                                                {{ $course->modules_count }} modules
+                                                @if($course->cpd_accredited)
+                                                    &middot; CPD accredited
+                                                @elseif($course->is_free)
+                                                    &middot; Free
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
-                    <div class="sidebar-section">
-                        <h3 class="sidebar-title">Supplier Directory</h3>
-                        <div class="suppliers-widget">
-                            <a href="{{ route('suppliers.index') }}" class="supplier-item">
-                                <div class="supplier-item-logo">AAH</div>
-                                <div class="supplier-item-name">AAH</div>
-                                <div class="supplier-item-cat">Wholesaler</div>
-                            </a>
-                            <a href="{{ route('suppliers.index') }}" class="supplier-item">
-                                <div class="supplier-item-logo">AH</div>
-                                <div class="supplier-item-name">Alliance</div>
-                                <div class="supplier-item-cat">Wholesaler</div>
-                            </a>
-                            <a href="{{ route('suppliers.index') }}" class="supplier-item">
-                                <div class="supplier-item-logo">CG</div>
-                                <div class="supplier-item-name">Cegedim</div>
-                                <div class="supplier-item-cat">PMR</div>
-                            </a>
-                            <a href="{{ route('suppliers.index') }}" class="supplier-item">
-                                <div class="supplier-item-logo">NM</div>
-                                <div class="supplier-item-name">Numark</div>
-                                <div class="supplier-item-cat">Buying Group</div>
+                    @if($directorySuppliers->isNotEmpty())
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Supplier Directory</h3>
+                            <div class="suppliers-widget">
+                                @foreach($directorySuppliers as $supplier)
+                                    <a href="{{ route('suppliers.show', $supplier->slug) }}" class="supplier-item">
+                                        <div class="supplier-item-logo">{{ \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr(str_replace(' ', '', $supplier->name), 0, 3)) }}</div>
+                                        <div class="supplier-item-name">{{ \Illuminate\Support\Str::limit($supplier->name, 16) }}</div>
+                                        <div class="supplier-item-cat">{{ $supplier->category->label() }}</div>
+                                    </a>
+                                @endforeach
+                            </div>
+                            <a href="{{ route('suppliers.index') }}" class="section-link" style="display: block; margin-top: 14px; text-align: center;">
+                                View all {{ $totalSuppliers }}{{ $totalSuppliers > 10 ? '+' : '' }} suppliers &rarr;
                             </a>
                         </div>
-                        <a href="{{ route('suppliers.index') }}" class="section-link" style="display: block; margin-top: 14px; text-align: center;">View all 240+ suppliers &rarr;</a>
-                    </div>
+                    @endif
 
                     <div class="newsletter-widget">
                         <h3>Weekly Intelligence</h3>
@@ -358,40 +327,26 @@
             </div>
         </div>
 
-        <section class="resources-full">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Resources & Guides</h2>
-                    <a href="{{ route('resources.index') }}" class="section-link">View all &rarr;</a>
+        @if($featuredResources->isNotEmpty())
+            <section class="resources-full">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Resources & Guides</h2>
+                        <a href="{{ route('resources.index') }}" class="section-link">View all &rarr;</a>
+                    </div>
+                    <div class="resources-grid">
+                        @foreach($featuredResources as $resource)
+                            <a href="{{ route('resources.show', $resource->slug) }}" class="resource-card">
+                                <div class="resource-icon">{{ $resource->type_icon }}</div>
+                                <div class="resource-type">{{ $resource->type_label }}</div>
+                                <h3 class="resource-title">{{ $resource->title }}</h3>
+                                <p class="resource-desc">{{ \Illuminate\Support\Str::limit($resource->description, 90) }}</p>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
-                <div class="resources-grid">
-                    <a href="{{ route('resources.index') }}" class="resource-card">
-                        <div class="resource-icon">&#x1F4CA;</div>
-                        <div class="resource-type">Tool</div>
-                        <h3 class="resource-title">Pharmacy Valuation Calculator</h3>
-                        <p class="resource-desc">Estimate value based on items, turnover, and market factors.</p>
-                    </a>
-                    <a href="{{ route('resources.index') }}" class="resource-card">
-                        <div class="resource-icon">&#x1F4CB;</div>
-                        <div class="resource-type">Checklist</div>
-                        <h3 class="resource-title">Due Diligence Checklist</h3>
-                        <p class="resource-desc">Everything to verify before making an offer.</p>
-                    </a>
-                    <a href="{{ route('resources.index') }}" class="resource-card">
-                        <div class="resource-icon">&#x1F393;</div>
-                        <div class="resource-type">Course</div>
-                        <h3 class="resource-title">Pre-Ownership Programme</h3>
-                        <p class="resource-desc">8-module CPD course for prospective buyers.</p>
-                    </a>
-                    <a href="{{ route('resources.index') }}" class="resource-card">
-                        <div class="resource-icon">&#x1F4DD;</div>
-                        <div class="resource-type">Template</div>
-                        <h3 class="resource-title">Business Plan Template</h3>
-                        <p class="resource-desc">Bank-ready template for acquisitions.</p>
-                    </a>
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif
     </main>
 
     <footer class="footer">
