@@ -1,7 +1,7 @@
 <x-layouts.app title="List Your Business">
     <div class="bg-gray-900 text-white py-16">
         <div class="max-w-4xl mx-auto px-8 text-center">
-            <h1 class="text-4xl font-bold mb-4">Join the P3 Pharmacy Supplier Directory</h1>
+            <h1 class="text-4xl font-bold mb-4">Join the Pharmacy Owner by P3 Supplier Directory</h1>
             <p class="text-xl text-gray-300">Connect with pharmacy professionals across the UK and grow your business.</p>
         </div>
     </div>
@@ -165,7 +165,7 @@
 
         <!-- Benefits -->
         <div class="text-center mb-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-8">Why Join P3 Pharmacy?</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-8">Why Join Pharmacy Owner by P3?</h2>
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">

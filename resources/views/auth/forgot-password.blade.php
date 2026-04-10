@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password — P3 Pharmacy</title>
+    <title>Reset Password — Pharmacy Owner by P3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 <body class="antialiased">
 <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <a href="/" class="flex justify-center items-center gap-2">
-            <span class="text-2xl font-bold text-gray-900">p3<span class="text-green-600">pharmacy</span></span>
+        <a href="/" class="flex justify-center items-center gap-3">
+            <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-12 w-auto">
+            <span class="text-left leading-tight">
+                <span class="block text-xl font-serif font-bold text-gray-900">Pharmacy Owner</span>
+                <span class="block text-xs font-medium text-gray-500">by P3</span>
+            </span>
         </a>
         <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">Reset your password</h2>
         <p class="mt-2 text-center text-sm text-gray-600">

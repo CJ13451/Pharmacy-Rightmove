@@ -1,7 +1,7 @@
 {
-    "name": "p3pharmacy/pharmacy-rightmove",
+    "name": "pharmacyowner/pharmacy-rightmove",
     "type": "project",
-    "description": "P3 Pharmacy - Marketplace platform for pharmacy listings, training, and supplier directory",
+    "description": "Pharmacy Owner by P3 - Marketplace platform for pharmacy listings, training, and supplier directory",
     "keywords": ["laravel", "pharmacy", "marketplace"],
     "license": "proprietary",
     "require": {

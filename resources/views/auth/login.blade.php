@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In — P3 Pharmacy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Sign In — Pharmacy Owner by P3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, sans-serif; background: #f8f8f8; color: #1a1a1a; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
-        .login-logo { font-weight: 900; font-size: 28px; letter-spacing: -1px; text-decoration: none; color: #1a1a1a; margin-bottom: 4px; display: block; text-align: center; }
+        .login-logo { font-family: 'Newsreader', serif; font-weight: 800; font-size: 26px; letter-spacing: -0.5px; text-decoration: none; color: #1a1a1a; display: block; text-align: center; line-height: 1.1; }
         .login-tagline { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.5px; text-align: center; margin-bottom: 32px; }
+        .login-lockup { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px; text-decoration: none; }
+        .login-lockup img { height: 56px; width: auto; display: block; }
+        .login-lockup-text { text-align: left; }
         .login-box { background: #fff; border: 1px solid #e0e0e0; padding: 32px; width: 100%; max-width: 400px; }
         .login-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
         .login-subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
@@ -32,7 +35,13 @@
     </style>
 </head>
 <body>
-    <a href="/" class="login-logo">p3pharmacy</a>
+    <a href="/" class="login-lockup">
+        <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
+        <span class="login-lockup-text">
+            <span class="login-logo">Pharmacy Owner</span>
+            <span style="font-size:11px;font-weight:500;color:#888;letter-spacing:0.5px;">by P3</span>
+        </span>
+    </a>
     <div class="login-tagline">Intelligence. Analysis. Insight.</div>
 
     <div class="login-box">

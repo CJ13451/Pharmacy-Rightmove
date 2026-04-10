@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — P3 Pharmacy</title>
+    <title>Privacy Policy — Pharmacy Owner by P3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 <body class="antialiased bg-white">
     <header class="border-b border-gray-200">
         <nav class="max-w-4xl mx-auto px-4 py-4">
-            <a href="/" class="text-xl font-bold text-gray-900">p3<span class="text-green-600">pharmacy</span></a>
+            <a href="/" class="inline-flex items-center gap-3 text-gray-900">
+                <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-10 w-auto">
+                <span class="font-serif font-bold text-lg leading-tight">Pharmacy Owner<br><span class="text-xs font-medium text-gray-500">by P3</span></span>
+            </a>
         </nav>
     </header>
 
@@ -49,13 +52,13 @@
             <p class="text-gray-700 mb-4">We use Dotdigital to manage our email communications. You can unsubscribe from marketing emails at any time by clicking the unsubscribe link in any email.</p>
 
             <h2 class="text-xl font-semibold text-gray-900 mt-8 mb-4">8. Contact Us</h2>
-            <p class="text-gray-700 mb-4">If you have any questions about this Privacy Policy, please contact us at privacy@p3pharmacy.co.uk.</p>
+            <p class="text-gray-700 mb-4">If you have any questions about this Privacy Policy, please contact us at privacy@pharmacyowner.co.uk.</p>
         </div>
     </main>
 
     <footer class="border-t border-gray-200 mt-12">
         <div class="max-w-4xl mx-auto px-4 py-6 text-center text-gray-500 text-sm">
-            &copy; {{ date('Y') }} P3 Pharmacy. All rights reserved.
+            &copy; {{ date('Y') }} Pharmacy Owner by P3. All rights reserved.
         </div>
     </footer>
 </body>
