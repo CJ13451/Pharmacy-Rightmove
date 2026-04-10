@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class CourseModule extends Model
 {
@@ -22,6 +23,8 @@ class CourseModule extends Model
         'video_url',
         'video_provider',
         'scorm_package_url',
+        'scorm_package_path',
+        'scorm_entry_path',
         'scorm_version',
         'download_url',
         'download_name',
@@ -71,6 +74,21 @@ class CourseModule extends Model
     public function getIsScormAttribute(): bool
     {
         return $this->content_type === 'scorm';
+    }
+
+    /**
+     * Resolved URL that the SCORM iframe should load. Returns null until the
+     * admin has uploaded a package and the observer has extracted it.
+     */
+    public function getScormEntryUrlAttribute(): ?string
+    {
+        if (! $this->scorm_package_path || ! $this->scorm_entry_path) {
+            return null;
+        }
+
+        return Storage::disk('public')->url(
+            $this->scorm_package_path.'/'.ltrim($this->scorm_entry_path, '/')
+        );
     }
 
     public function getIsVideoAttribute(): bool
