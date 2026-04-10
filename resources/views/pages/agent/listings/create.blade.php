@@ -1,5 +1,5 @@
 <x-layouts.app title="Create Listing">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="mb-8">
             <a href="{{ route('agent.listings.index') }}" class="text-gray-500 hover:text-gray-700 text-sm mb-2 inline-flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -10,6 +10,7 @@
             <h1 class="text-2xl font-bold text-gray-900">Create New Listing</h1>
         </div>
 
+        <div class="max-w-4xl mx-auto">
         <form method="POST" action="{{ route('agent.listings.store') }}" enctype="multipart/form-data" class="space-y-8">
             @csrf
 
@@ -227,6 +228,7 @@
                 </button>
             </div>
         </form>
+        </div>
     </div>
 
     <script>

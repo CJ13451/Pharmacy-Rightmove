@@ -1,5 +1,5 @@
 <x-layouts.app :title="'Edit: ' . $listing->title">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex items-center gap-4 mb-8">
             <a href="{{ route('agent.listings.index') }}" class="text-gray-500 hover:text-gray-700">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,6 +36,7 @@
             </div>
         @endif
 
+        <div class="max-w-4xl mx-auto">
         <form method="POST" action="{{ route('agent.listings.update', $listing) }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
@@ -202,5 +203,6 @@
                 </form>
             </div>
         @endif
+        </div>
     </div>
 </x-layouts.app>

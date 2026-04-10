@@ -1,5 +1,5 @@
 <x-layouts.app title="Subscription Plans">
-<div class="max-w-5xl mx-auto px-4 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <h1 class="text-3xl font-bold text-gray-900 mb-2">Subscription Plans</h1>
     <p class="text-gray-600 mb-8">Choose the plan that best fits your business needs.</p>
 

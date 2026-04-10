@@ -174,6 +174,7 @@ Route::middleware(['auth'])->group(function () {
         // Account Settings
         Route::get('/account', [DashboardController::class, 'account'])->name('account.settings');
         Route::put('/account', [DashboardController::class, 'updateAccount'])->name('account.update');
+        Route::put('/account/password', [DashboardController::class, 'updatePassword'])->name('account.password.update');
         Route::get('/account/purchases', [DashboardController::class, 'purchases'])->name('account.purchases');
         
         // News & Articles

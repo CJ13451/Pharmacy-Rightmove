@@ -1,7 +1,8 @@
 <x-layouts.app title="Edit Supplier Profile">
-<div class="max-w-4xl mx-auto px-4 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <h1 class="text-3xl font-bold text-gray-900 mb-8">Edit Profile</h1>
 
+    <div class="max-w-4xl mx-auto">
     @if(session('success'))
         <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg">{{ session('success') }}</div>
     @endif
@@ -84,5 +85,6 @@
             <button type="submit" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">Save Changes</button>
         </div>
     </form>
+    </div>
 </div>
 </x-layouts.app>
