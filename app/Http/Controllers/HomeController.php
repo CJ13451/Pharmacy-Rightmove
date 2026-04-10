@@ -73,44 +73,14 @@ class HomeController extends Controller
     }
 
     /**
-     * Authenticated home page (after login)
+     * Authenticated home page (after login).
+     *
+     * Renders the same newspaper-style layout as the public landing page
+     * so /home and / look identical. The landing Blade already handles
+     * both auth and guest states in its inline header.
      */
     public function home(): View
     {
-        $featuredListings = PropertyListing::active()
-            ->featured()
-            ->with('user')
-            ->limit(3)
-            ->get();
-
-        $latestListings = PropertyListing::active()
-            ->with('user')
-            ->latest('published_at')
-            ->limit(6)
-            ->get();
-
-        $latestArticles = Article::published()
-            ->with('author')
-            ->recent()
-            ->limit(4)
-            ->get();
-
-        $featuredCourses = Course::published()
-            ->limit(3)
-            ->get();
-
-        $stats = [
-            'listings_count' => PropertyListing::active()->count(),
-            'articles_count' => Article::published()->count(),
-            'courses_count' => Course::published()->count(),
-        ];
-
-        return view('pages.home', compact(
-            'featuredListings',
-            'latestListings',
-            'latestArticles',
-            'featuredCourses',
-            'stats'
-        ));
+        return $this->landing();
     }
 }
