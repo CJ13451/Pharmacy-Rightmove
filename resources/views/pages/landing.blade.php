@@ -41,11 +41,32 @@
         .logo-main { display: flex; align-items: baseline; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -1px; color: var(--black); }
         .logo-tagline { font-size: 11px; font-weight: 500; color: var(--grey-600); letter-spacing: 0.5px; margin-top: 2px; }
         .header-url { font-size: 13px; color: var(--grey-500); }
-        .category-nav { display: flex; gap: 0; border-bottom: 3px solid var(--black); }
-        .category-nav a { padding: 12px 18px; font-size: 13px; font-weight: 600; color: var(--grey-700); text-decoration: none; transition: all 0.15s; position: relative; }
+        .category-nav {
+            display: flex;
+            gap: 0;
+            background: linear-gradient(to bottom, transparent calc(100% - 3px), var(--black) calc(100% - 3px));
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .category-nav::-webkit-scrollbar { display: none; }
+        .category-nav a {
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--grey-700);
+            text-decoration: none;
+            transition: all 0.15s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
         .category-nav a:hover { color: var(--black); background: var(--grey-50); }
-        .category-nav a.active { color: var(--black); }
-        .category-nav a.active::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: var(--green); }
+        .category-nav a.active {
+            color: var(--black);
+            box-shadow: inset 0 -3px 0 var(--green);
+        }
         .category-nav a.highlight { background: var(--green); color: white; }
         .category-nav a.highlight:hover { background: #006644; }
         .main-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; padding: 40px 0; }
@@ -136,7 +157,7 @@
             .properties-grid { grid-template-columns: 1fr; }
             .resources-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-top { grid-template-columns: 1fr 1fr; }
-            .category-nav { overflow-x: auto; }
+            .category-nav a { padding: 10px 12px; font-size: 12px; }
             .header-top { display: none; }
         }
     </style>
