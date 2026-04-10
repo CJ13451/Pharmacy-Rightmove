@@ -82,23 +82,30 @@ class TrainingController extends Controller
     {
         $course = Course::published()
             ->where('slug', $slug)
+            ->with('modules')
             ->firstOrFail();
 
         $user = auth()->user();
 
-        // Check if already enrolled
+        // Check if already enrolled - if so, send them straight to the
+        // first module so they can carry on learning.
         $existing = Enrolment::where('user_id', $user->id)
             ->where('course_id', $course->id)
             ->first();
 
         if ($existing) {
+            $firstModule = $course->modules->first();
+            if ($firstModule) {
+                return redirect()->route('training.module', [$course->slug, $firstModule->id]);
+            }
             return redirect()->route('training.show', $course->slug)
                 ->with('info', 'You are already enrolled in this course.');
         }
 
-        // If paid course, redirect to purchase flow
+        // If paid course, redirect to purchase flow (unless already paid).
+        // Free courses skip this block entirely and drop straight into
+        // enrolment below - no purchase required.
         if (!$course->is_free && $course->price > 0) {
-            // Check if already purchased
             $purchased = CoursePurchase::where('user_id', $user->id)
                 ->where('course_id', $course->id)
                 ->where('status', 'completed')
@@ -118,6 +125,15 @@ class TrainingController extends Controller
         ]);
 
         $course->increment('enrolments_count');
+
+        // Drop the user straight into the first module so the "Start
+        // Course" button actually starts the course, rather than
+        // bouncing them back to the show page.
+        $firstModule = $course->modules->first();
+        if ($firstModule) {
+            return redirect()->route('training.module', [$course->slug, $firstModule->id])
+                ->with('success', 'You are enrolled. Good luck with the course!');
+        }
 
         return redirect()->route('training.show', $course->slug)
             ->with('success', 'You have been enrolled in this course.');
