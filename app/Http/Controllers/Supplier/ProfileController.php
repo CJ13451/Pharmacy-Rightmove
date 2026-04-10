@@ -10,10 +10,14 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function edit(): View
+    public function edit()
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         return view('pages.supplier.profile.edit', [
             'supplier' => $supplier,
@@ -24,7 +28,11 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = auth()->user();
-        $supplier = Supplier::where('user_id', $user->id)->firstOrFail();
+        $supplier = Supplier::where('user_id', $user->id)->first();
+
+        if (! $supplier) {
+            return redirect()->route('supplier.dashboard');
+        }
 
         $rules = [
             'name' => ['required', 'string', 'max:200'],

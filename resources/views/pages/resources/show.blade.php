@@ -6,7 +6,7 @@
             <ol class="flex items-center gap-2">
                 <li><a href="{{ route('resources.index') }}" class="text-gray-500 hover:text-green-600">Resources</a></li>
                 <li class="text-gray-400">/</li>
-                <li><a href="{{ route('resources.index', ['category' => $resource->category->value]) }}" class="text-gray-500 hover:text-green-600">{{ $resource->category->label() }}</a></li>
+                <li><a href="{{ route('resources.index', ['category' => $resource->category]) }}" class="text-gray-500 hover:text-green-600">{{ $resource->category_label }}</a></li>
                 <li class="text-gray-400">/</li>
                 <li class="text-gray-900 truncate max-w-xs">{{ $resource->title }}</li>
             </ol>
@@ -32,7 +32,7 @@
             <!-- Content -->
             <div class="p-8">
                 <div class="flex items-center gap-3 mb-4">
-                    <span class="text-sm font-semibold text-green-600 uppercase">{{ $resource->category->label() }}</span>
+                    <span class="text-sm font-semibold text-green-600 uppercase">{{ $resource->category_label }}</span>
                     <span class="text-gray-300">·</span>
                     <span class="text-sm text-gray-500 uppercase">{{ $resource->file_type }}</span>
                     @if($resource->file_size)
@@ -61,9 +61,9 @@
                                 </svg>
                             </div>
                             <h3 class="text-lg font-bold text-gray-900 mb-2">Premium Resource</h3>
-                            <p class="text-gray-600 mb-4">This resource is available to premium members only.</p>
-                            <a href="{{ route('account.upgrade') }}" class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition">
-                                Upgrade to Access
+                            <p class="text-gray-600 mb-4">This resource is available to premium members only. Contact us to enquire about premium access.</p>
+                            <a href="mailto:hello@pharmacyowner.co.uk?subject=Premium%20access%20enquiry" class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+                                Contact us
                             </a>
                         </div>
                     @else
@@ -95,7 +95,7 @@
                     @foreach($relatedResources as $related)
                         <a href="{{ route('resources.show', $related->slug) }}" class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition group">
                             <div class="flex items-center gap-2 mb-2">
-                                <span class="text-xs font-medium text-green-600 uppercase">{{ $related->category->label() }}</span>
+                                <span class="text-xs font-medium text-green-600 uppercase">{{ $related->category_label }}</span>
                             </div>
                             <h3 class="font-semibold text-gray-900 group-hover:text-green-600 transition line-clamp-2">{{ $related->title }}</h3>
                             <p class="text-gray-500 text-sm mt-2">{{ $related->file_type }} · {{ $related->formatted_file_size }}</p>

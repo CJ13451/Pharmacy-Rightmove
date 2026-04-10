@@ -28,11 +28,8 @@
                 </div>
                 <div>
                     <p class="font-semibold text-amber-800">Awaiting Payment</p>
-                    <p class="text-sm text-amber-700">Complete payment to publish your listing.</p>
+                    <p class="text-sm text-amber-700">Your listing will be published once payment has cleared. Please contact support if this status persists.</p>
                 </div>
-                <a href="{{ route('agent.listings.payment', $listing) }}" class="ml-auto bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-medium transition">
-                    Pay Now
-                </a>
             </div>
         @endif
 

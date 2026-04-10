@@ -7,7 +7,7 @@
 </div>
 <div class="container">
     <div class="resources-grid-page">
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'valuation']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F4CA;</div>
             <div class="resource-type">Calculator</div>
             <h3 class="resource-title">Pharmacy Valuation Calculator</h3>
@@ -17,7 +17,7 @@
                 <span class="resource-cta">Use calculator &rarr;</span>
             </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'valuation']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F4C8;</div>
             <div class="resource-type">Report</div>
             <h3 class="resource-title">Market Valuation Trends Q1 2026</h3>
@@ -27,7 +27,7 @@
                 <span class="resource-cta">Download &rarr;</span>
             </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'valuation']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F4D6;</div>
             <div class="resource-type">Guide</div>
             <h3 class="resource-title">Understanding Valuation Methods</h3>

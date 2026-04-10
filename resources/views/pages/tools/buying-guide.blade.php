@@ -7,7 +7,7 @@
 </div>
 <div class="container">
     <div class="resources-grid-page">
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'buying']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F4D6;</div>
             <div class="resource-type">Guide</div>
             <h3 class="resource-title">Step 1: Research & Planning</h3>
@@ -17,7 +17,7 @@
                 <span class="resource-cta">Read &rarr;</span>
             </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'buying']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F50D;</div>
             <div class="resource-type">Guide</div>
             <h3 class="resource-title">Step 2: Finding Pharmacies</h3>
@@ -27,7 +27,7 @@
                 <span class="resource-cta">Read &rarr;</span>
             </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'buying']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x2705;</div>
             <div class="resource-type">Guide</div>
             <h3 class="resource-title">Step 3: Due Diligence</h3>
@@ -37,7 +37,7 @@
                 <span class="resource-cta">Read &rarr;</span>
             </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'buying']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F4B0;</div>
             <div class="resource-type">Guide</div>
             <h3 class="resource-title">Step 4: Finance & Negotiation</h3>
@@ -47,7 +47,7 @@
                 <span class="resource-cta">Read &rarr;</span>
             </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'buying']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F4CB;</div>
             <div class="resource-type">Guide</div>
             <h3 class="resource-title">Step 5: Legal Process</h3>
@@ -57,7 +57,7 @@
                 <span class="resource-cta">Read &rarr;</span>
             </div>
         </a>
-        <a href="#" class="resource-card">
+        <a href="{{ route('resources.index', ['category' => 'buying']) }}" class="resource-card">
             <div class="resource-icon-lg">&#x1F3E0;</div>
             <div class="resource-type">Guide</div>
             <h3 class="resource-title">Step 6: Taking Ownership</h3>
