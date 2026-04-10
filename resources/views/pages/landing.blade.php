@@ -38,12 +38,12 @@
         .btn-primary:hover { background: var(--grey-800); }
         .header-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
         .logo { display: flex; flex-direction: column; }
-        .logo-main { font-family: 'Newsreader', serif; font-weight: 800; font-size: 30px; letter-spacing: -0.5px; color: var(--black); line-height: 1; }
-        .logo-tagline { font-size: 10px; font-weight: 500; color: var(--grey-500); letter-spacing: 0.4px; text-transform: uppercase; margin-top: 2px; }
-        .logo-lockup { display: inline-flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; }
-        .logo-lockup img { height: 64px; width: auto; display: block; flex-shrink: 0; }
-        .logo-lockup-text { display: flex; flex-direction: column; line-height: 1.1; text-align: right; }
-        .logo-by { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 18px; color: var(--green); margin-top: 4px; letter-spacing: 0.2px; }
+        /* ---- Brand lockup ---- */
+        .logo-lockup { display: inline-grid; grid-template-columns: auto auto auto; grid-template-rows: auto auto; column-gap: 14px; row-gap: 7px; align-items: center; text-decoration: none; color: inherit; }
+        .logo-main { grid-column: 1; grid-row: 1; align-self: end; font-family: 'Newsreader', serif; font-weight: 800; font-size: 30px; letter-spacing: -0.5px; color: var(--black); line-height: 1; white-space: nowrap; }
+        .logo-by { grid-column: 2; grid-row: 1; align-self: end; font-family: 'Newsreader', serif; font-style: italic; font-weight: 600; font-size: 26px; color: var(--green); line-height: 1; }
+        .logo-lockup img { grid-column: 3; grid-row: 1 / 3; height: 58px; width: auto; display: block; align-self: center; }
+        .logo-tagline { grid-column: 1; grid-row: 2; display: flex; justify-content: space-between; font-size: 10px; font-weight: 600; color: var(--grey-500); letter-spacing: 1px; text-transform: uppercase; }
         .header-url { font-size: 13px; color: var(--grey-500); }
         .category-nav {
             display: flex;
@@ -144,10 +144,10 @@
         .resource-desc { font-size: 12px; color: var(--grey-600); }
         .footer { background: var(--black); color: var(--white); padding: 56px 0 28px; }
         .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--grey-700); }
-        .footer-brand .logo-main { font-size: 22px; color: var(--white); margin-bottom: 4px; }
-        .footer-brand .logo-tagline { color: var(--grey-400); margin-bottom: 12px; }
-        .footer-brand .logo-lockup img { height: 52px; }
-        .footer-brand .logo-by { font-size: 14px; color: #7fdbb6; }
+        .footer-brand .logo-main { font-size: 22px; color: var(--white); }
+        .footer-brand .logo-tagline { font-size: 9px; letter-spacing: 1.4px; color: var(--grey-400); }
+        .footer-brand .logo-lockup img { height: 46px; }
+        .footer-brand .logo-by { font-size: 20px; color: #7fdbb6; }
         .footer-desc { font-size: 13px; color: var(--grey-400); line-height: 1.6; }
         .footer-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey-400); margin-bottom: 14px; }
         .footer-col ul { list-style: none; }
@@ -196,12 +196,10 @@
             </div>
             <div class="header-main">
                 <a href="{{ route('landing') }}" class="logo-lockup">
-                    <span class="logo-lockup-text">
-                        <span class="logo-main">Pharmacy Owner</span>
-                        <span class="logo-by">by P3</span>
-                        <span class="logo-tagline">Intelligence. Analysis. Insight.</span>
-                    </span>
+                    <span class="logo-main">Pharmacy Owner</span>
+                    <span class="logo-by">by</span>
                     <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
+                    <span class="logo-tagline"><span>Intelligence</span><span>&middot;</span><span>Analysis</span><span>&middot;</span><span>Insight</span></span>
                 </a>
                 <div class="header-url">pharmacyowner.co.uk</div>
             </div>
@@ -385,12 +383,10 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <div class="logo-lockup">
-                        <span class="logo-lockup-text">
-                            <span class="logo-main">Pharmacy Owner</span>
-                            <span class="logo-by">by P3</span>
-                            <span class="logo-tagline">Intelligence. Analysis. Insight.</span>
-                        </span>
+                        <span class="logo-main">Pharmacy Owner</span>
+                        <span class="logo-by">by</span>
                         <img src="{{ asset('images/p3-logo.png') }}" alt="P3">
+                        <span class="logo-tagline"><span>Intelligence</span><span>&middot;</span><span>Analysis</span><span>&middot;</span><span>Insight</span></span>
                     </div>
                     <p class="footer-desc">The essential resource for UK pharmacy owners and prospective buyers.</p>
                 </div>

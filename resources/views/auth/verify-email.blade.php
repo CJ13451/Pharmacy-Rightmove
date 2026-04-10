@@ -10,12 +10,13 @@
 <body class="antialiased">
 <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <a href="/" class="flex justify-center items-center gap-4">
-            <span class="text-right leading-tight">
-                <span class="block text-xl font-serif font-bold text-gray-900">Pharmacy Owner</span>
-                <span class="block text-base font-serif italic font-bold text-green-600 mt-0.5">by P3</span>
+        <a href="/" style="display:inline-grid;grid-template-columns:auto auto auto;grid-template-rows:auto auto;column-gap:12px;row-gap:6px;align-items:center;text-decoration:none;">
+            <span style="grid-column:1;grid-row:1;align-self:end;white-space:nowrap;" class="font-serif font-extrabold text-xl text-gray-900 leading-none tracking-tight">Pharmacy Owner</span>
+            <span style="grid-column:2;grid-row:1;align-self:end;" class="font-serif italic font-semibold text-lg text-green-600 leading-none">by</span>
+            <img src="{{ asset('images/p3-logo.png') }}" alt="P3" style="grid-column:3;grid-row:1 / 3;align-self:center;" class="h-12 w-auto">
+            <span style="grid-column:1;grid-row:2;display:flex;justify-content:space-between;" class="text-[9px] font-semibold text-gray-500 tracking-widest uppercase">
+                <span>Intelligence</span><span>&middot;</span><span>Analysis</span><span>&middot;</span><span>Insight</span>
             </span>
-            <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-14 w-auto">
         </a>
         <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">Verify your email</h2>
     </div>

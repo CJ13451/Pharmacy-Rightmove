@@ -10,9 +10,13 @@
 <body class="antialiased bg-white">
     <header class="border-b border-gray-200">
         <nav class="max-w-4xl mx-auto px-4 py-4">
-            <a href="/" class="inline-flex items-center gap-3 text-gray-900">
-                <span class="font-serif font-bold text-lg leading-tight text-right">Pharmacy Owner<br><span class="text-sm font-serif italic font-bold text-green-600">by P3</span></span>
-                <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-12 w-auto">
+            <a href="/" style="display:inline-grid;grid-template-columns:auto auto auto;grid-template-rows:auto auto;column-gap:10px;row-gap:4px;align-items:center;text-decoration:none;">
+                <span style="grid-column:1;grid-row:1;align-self:end;white-space:nowrap;" class="font-serif font-extrabold text-lg text-gray-900 leading-none">Pharmacy Owner</span>
+                <span style="grid-column:2;grid-row:1;align-self:end;" class="font-serif italic font-semibold text-base text-green-600 leading-none">by</span>
+                <img src="{{ asset('images/p3-logo.png') }}" alt="P3" style="grid-column:3;grid-row:1 / 3;align-self:center;" class="h-10 w-auto">
+                <span style="grid-column:1;grid-row:2;display:flex;justify-content:space-between;" class="text-[8px] font-semibold text-gray-500 tracking-wider uppercase">
+                    <span>Intelligence</span><span>&middot;</span><span>Analysis</span><span>&middot;</span><span>Insight</span>
+                </span>
             </a>
         </nav>
     </header>
