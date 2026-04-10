@@ -1,5 +1,5 @@
 <x-layouts.app title="Agent Dashboard">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-8 py-8">
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-2xl font-bold text-gray-900">Agent Dashboard</h1>
             <a href="{{ route('agent.listings.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition">

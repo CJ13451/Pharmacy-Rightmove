@@ -1,12 +1,12 @@
 <x-layouts.app title="List Your Business">
     <div class="bg-gray-900 text-white py-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-4xl mx-auto px-8 text-center">
             <h1 class="text-4xl font-bold mb-4">Join the P3 Pharmacy Supplier Directory</h1>
             <p class="text-xl text-gray-300">Connect with pharmacy professionals across the UK and grow your business.</p>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto px-8 py-12">
         <!-- Pricing Tiers -->
         <div class="grid md:grid-cols-3 gap-8 mb-16">
             <!-- Free Tier -->

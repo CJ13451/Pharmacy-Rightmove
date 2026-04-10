@@ -312,7 +312,10 @@
             .resources-grid-page { grid-template-columns: 1fr; }
             .resources-categories-inner { flex-wrap: wrap; gap: 8px; }
             .training-stats { flex-wrap: wrap; gap: 20px; }
-            .container { padding: 0 16px; }
+            /* Leave .container padding at 32px on mobile so the header
+               and footer on every authenticated page line up exactly with
+               the homepage. The landing page's .container does not drop
+               its padding on mobile, so this one must not either. */
             .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
             .grid-sidebar { grid-template-columns: 1fr; }
             .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }

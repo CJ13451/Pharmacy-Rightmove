@@ -1,5 +1,5 @@
 <x-layouts.app title="Payment Successful">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="max-w-7xl mx-auto px-8 py-12">
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8 text-center">
         <div class="mb-6">
             <svg class="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

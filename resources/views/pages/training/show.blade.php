@@ -1,6 +1,6 @@
 <x-layouts.app :title="$course->title">
     <div class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-8">
             <div class="flex items-center gap-2 mb-4">
                 @if($course->is_free)
                     <span class="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">FREE</span>
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-8 py-8">
         <div class="grid lg:grid-cols-3 gap-8">
             <!-- Main Content -->
             <div class="lg:col-span-2">
