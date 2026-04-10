@@ -127,11 +127,14 @@ class TrainingController extends Controller
     {
         $course = Course::published()
             ->where('slug', $courseSlug)
+            ->with('modules')
             ->firstOrFail();
 
-        $module = CourseModule::where('course_id', $course->id)
-            ->where('id', $moduleId)
-            ->firstOrFail();
+        $module = $course->modules->firstWhere('id', $moduleId);
+
+        if (! $module) {
+            abort(404);
+        }
 
         $user = auth()->user();
 
@@ -158,7 +161,9 @@ class TrainingController extends Controller
         }
 
         $nextModule = $module->getNextModule();
-        $previousModule = $module->getPreviousModule();
+        $prevModule = $module->getPreviousModule();
+        $moduleIndex = $course->modules->search(fn ($m) => $m->id === $module->id);
+        $isCompleted = $progress->status === 'completed';
 
         return view('pages.training.module', compact(
             'course',
@@ -166,7 +171,9 @@ class TrainingController extends Controller
             'progress',
             'enrolment',
             'nextModule',
-            'previousModule'
+            'prevModule',
+            'moduleIndex',
+            'isCompleted'
         ));
     }
 

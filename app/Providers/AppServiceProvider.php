@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\CourseModule;
 use App\Models\User;
+use App\Observers\CourseModuleObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,5 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::define('manage-listings', fn (User $user) => $user->role->canManageListings());
         Gate::define('manage-supplier-profile', fn (User $user) => $user->role->canManageSupplierProfile());
+
+        CourseModule::observe(CourseModuleObserver::class);
     }
 }

@@ -60,16 +60,28 @@ class ModulesRelationManager extends RelationManager
 
                 Forms\Components\FileUpload::make('scorm_package_url')
                     ->label('SCORM Package (.zip)')
-                    ->acceptedFileTypes(['application/zip'])
+                    ->helperText('Upload a SCORM 1.2 or 2004 package. The zip will be extracted and the launch file resolved from imsmanifest.xml automatically on save.')
+                    ->acceptedFileTypes(['application/zip', 'application/x-zip-compressed', 'application/octet-stream'])
                     ->directory('scorm')
-                    ->visible(fn (Forms\Get $get) => $get('content_type') === 'scorm'),
+                    ->disk('public')
+                    ->visibility('public')
+                    ->maxSize(512 * 1024)
+                    ->visible(fn (Forms\Get $get) => $get('content_type') === 'scorm')
+                    ->columnSpanFull(),
 
                 Forms\Components\Select::make('scorm_version')
+                    ->label('SCORM Version')
+                    ->helperText('Leave blank to auto-detect from imsmanifest.xml.')
                     ->options([
                         '1.2' => 'SCORM 1.2',
                         '2004' => 'SCORM 2004',
                     ])
                     ->visible(fn (Forms\Get $get) => $get('content_type') === 'scorm'),
+
+                Forms\Components\Placeholder::make('scorm_entry_path_display')
+                    ->label('Resolved launch file')
+                    ->content(fn ($record) => $record?->scorm_entry_path ?: 'Not yet extracted — save the module after uploading.')
+                    ->visible(fn (Forms\Get $get, ?\App\Models\CourseModule $record) => $get('content_type') === 'scorm' && $record !== null),
 
                 Forms\Components\FileUpload::make('download_url')
                     ->label('Download File')
