@@ -14,6 +14,21 @@ use Livewire\Component;
 
 class RegistrationWizard extends Component
 {
+    /**
+     * Master switch for email verification on signup.
+     *
+     * Set to `true` to restore the original flow: a verification link is
+     * sent, the user is redirected to the "please check your email" notice,
+     * and `verified` middleware blocks the rest of the app until they click
+     * the link. Set to `false` to auto-verify every new user and drop them
+     * straight into the authenticated home page.
+     *
+     * The verification controller, mailable, routes and middleware are all
+     * still in place - this toggle is the only thing you need to flip when
+     * the transactional email pipeline is ready to go live.
+     */
+    private const REQUIRE_EMAIL_VERIFICATION = false;
+
     // Step tracking
     public int $currentStep = 1;
     public int $totalSteps = 4;
@@ -191,11 +206,33 @@ class RegistrationWizard extends Component
             'newsletter_subscribed' => $this->newsletter_optin,
         ]);
 
+        // When verification is disabled, immediately mark the user as
+        // verified so the rest of the `verified` middleware keeps working
+        // unchanged. `email_verified_at` is not mass-assignable on the
+        // User model, so we go through the canonical MustVerifyEmail
+        // helper. Flip REQUIRE_EMAIL_VERIFICATION at the top of this
+        // class to restore the original flow.
+        if (! self::REQUIRE_EMAIL_VERIFICATION) {
+            $user->markEmailAsVerified();
+        }
+
+        // Fire the Registered event either way. Laravel's default
+        // SendEmailVerificationNotification listener is a no-op for users
+        // who already have `email_verified_at` set, so this is safe even
+        // when verification is disabled, and it keeps any future
+        // listeners wired up.
         event(new Registered($user));
 
         Auth::login($user);
 
-        $this->redirect(route('verification.notice'));
+        // Only send the user to the "please verify your email" notice
+        // when verification is actually required. Otherwise drop them
+        // straight into the authenticated home page.
+        $this->redirect(
+            self::REQUIRE_EMAIL_VERIFICATION
+                ? route('verification.notice')
+                : route('home')
+        );
     }
 
     public function render()
