@@ -9,7 +9,16 @@
     <title>{{ $title ? "{$title} — Pharmacy Owner by P3" : 'Pharmacy Owner by P3 — Intelligence. Analysis. Insight.' }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { theme: { extend: { colors: { brand: { DEFAULT: '#00875a', 50: '#e6f7f0', 500: '#00875a', 600: '#007a52', 700: '#006644' } } } } }</script>
+    <script>tailwind.config = {
+        // Disable Tailwind's own `.container` class so it stops
+        // overriding the inline `.container` rule defined below. Without
+        // this, Tailwind Play CDN injects its responsive container styles
+        // at the end of <head> at runtime and wins the cascade - giving
+        // the header and footer on every authenticated page a different
+        // width from the homepage (which has no Tailwind loaded at all).
+        corePlugins: { container: false },
+        theme: { extend: { colors: { brand: { DEFAULT: '#00875a', 50: '#e6f7f0', 500: '#00875a', 600: '#007a52', 700: '#006644' } } } }
+    }</script>
     @livewireStyles
     @stack('styles')
     <style>
@@ -26,11 +35,12 @@
         .header-top a:hover { color: var(--black); }
         .header-top-right { display: flex; gap: 16px; align-items: center; }
         .header-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-        .logo-main { font-family: 'Newsreader', serif; font-weight: 800; font-size: 30px; letter-spacing: -0.5px; color: var(--black); text-decoration: none; }
-        .logo-lockup { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
-        .logo-lockup img { height: 56px; width: auto; display: block; flex-shrink: 0; }
-        .logo-lockup-text { display: flex; flex-direction: column; line-height: 1.15; }
-        .logo-lockup-text .logo-main { line-height: 1; }
+        .logo-main { font-family: 'Newsreader', serif; font-weight: 800; font-size: 30px; letter-spacing: -0.5px; color: var(--black); text-decoration: none; line-height: 1; }
+        .logo-lockup { display: inline-flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; }
+        .logo-lockup img { height: 64px; width: auto; display: block; flex-shrink: 0; }
+        .logo-lockup-text { display: flex; flex-direction: column; line-height: 1.1; text-align: right; }
+        .logo-lockup-text .logo-by { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 18px; color: var(--green); margin-top: 4px; letter-spacing: 0.2px; }
+        .logo-lockup-text .logo-tagline { font-size: 10px; font-weight: 500; color: var(--grey-500); letter-spacing: 0.4px; text-transform: uppercase; margin-top: 2px; }
         .logo-tagline { font-size: 11px; font-weight: 500; color: var(--grey-600); letter-spacing: 0.5px; margin-top: 2px; }
 
         /* Nav */
@@ -138,8 +148,10 @@
         /* Footer */
         .footer { background: var(--black); color: var(--white); padding: 56px 0 28px; margin-top: 60px; }
         .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--grey-700); }
-        .footer-brand .logo-lockup img { height: 48px; }
+        .footer-brand .logo-lockup img { height: 52px; }
         .footer-brand .logo-main { font-size: 22px; color: var(--white); }
+        .footer-brand .logo-lockup-text .logo-by { font-size: 14px; color: #7fdbb6; }
+        .footer-brand .logo-lockup-text .logo-tagline { color: var(--grey-400); }
         .footer-brand .logo-tagline { color: var(--grey-400); margin-bottom: 12px; }
         .footer-desc { font-size: 13px; color: var(--grey-400); line-height: 1.6; }
         .footer-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey-400); margin-bottom: 14px; }
@@ -354,11 +366,12 @@
             <div class="header-main">
                 <div>
                     <a href="{{ auth()->check() ? route('home') : route('landing') }}" class="logo-lockup">
-                        <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
                         <span class="logo-lockup-text">
                             <span class="logo-main">Pharmacy Owner</span>
-                            <span class="logo-tagline">by P3 &middot; Intelligence. Analysis. Insight.</span>
+                            <span class="logo-by">by P3</span>
+                            <span class="logo-tagline">Intelligence. Analysis. Insight.</span>
                         </span>
+                        <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
                     </a>
                 </div>
                 @auth
@@ -425,11 +438,12 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <div class="logo-lockup">
-                        <img src="{{ asset('images/p3-logo.png') }}" alt="P3">
                         <span class="logo-lockup-text">
                             <span class="logo-main">Pharmacy Owner</span>
-                            <span class="logo-tagline">by P3 &middot; Intelligence. Analysis. Insight.</span>
+                            <span class="logo-by">by P3</span>
+                            <span class="logo-tagline">Intelligence. Analysis. Insight.</span>
                         </span>
+                        <img src="{{ asset('images/p3-logo.png') }}" alt="P3">
                     </div>
                     <p class="footer-desc">The essential resource for UK pharmacy owners and prospective buyers.</p>
                 </div>
