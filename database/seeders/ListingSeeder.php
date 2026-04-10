@@ -17,7 +17,7 @@ class ListingSeeder extends Seeder
             return;
         }
 
-        $agent = User::where('email', 'agent@p3pharmacy.co.uk')->first()
+        $agent = User::where('email', 'agent@pharmacyowner.co.uk')->first()
             ?? User::where('role', 'estate_agent')->first()
             ?? User::where('role', 'admin')->first();
 
@@ -238,7 +238,7 @@ class ListingSeeder extends Seeder
                 'services' => ['nhs_dispensing', 'mur', 'flu_vaccination'],
                 'user_id' => $agent->id,
                 'agent_name' => $agent->full_name ?? 'P3 Listings Team',
-                'agent_company' => 'P3 Pharmacy Brokers',
+                'agent_company' => 'Pharmacy Owner by P3 Brokers',
                 'agent_email' => $agent->email,
                 'agent_phone' => '020 7946 0800',
                 'views_count' => random_int(40, 1800),

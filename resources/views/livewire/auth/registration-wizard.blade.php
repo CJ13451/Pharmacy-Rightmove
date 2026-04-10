@@ -1,7 +1,11 @@
 <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <a href="/" class="flex justify-center items-center gap-2">
-            <span class="text-2xl font-bold text-gray-900">p3<span class="text-green-600">pharmacy</span></span>
+        <a href="/" class="flex justify-center items-center gap-3">
+            <img src="{{ asset('images/p3-logo.png') }}" alt="P3" class="h-12 w-auto">
+            <span class="text-left leading-tight">
+                <span class="block text-xl font-serif font-bold text-gray-900">Pharmacy Owner</span>
+                <span class="block text-xs font-medium text-gray-500">by P3</span>
+            </span>
         </a>
         <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">Create your account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
@@ -261,7 +265,7 @@
                                     class="mt-0.5 h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
                                 >
                                 <span class="text-sm text-gray-700">
-                                    Send me the weekly P3 Pharmacy newsletter with industry news, new listings, and insights.
+                                    Send me the weekly Pharmacy Owner by P3 newsletter with industry news, new listings, and insights.
                                 </span>
                             </label>
 

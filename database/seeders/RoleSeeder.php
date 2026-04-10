@@ -12,14 +12,14 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         // Skip if admin already exists
-        if (User::where('email', 'admin@p3pharmacy.co.uk')->exists()) {
+        if (User::where('email', 'admin@pharmacyowner.co.uk')->exists()) {
             $this->command?->info('Admin user already exists, skipping seeder.');
             return;
         }
 
         // Create admin user
         User::create([
-            'email' => 'admin@p3pharmacy.co.uk',
+            'email' => 'admin@pharmacyowner.co.uk',
             'password' => Hash::make('password'),
             'first_name' => 'Admin',
             'last_name' => 'User',
@@ -33,7 +33,7 @@ class RoleSeeder extends Seeder
 
         // Create editor user
         User::create([
-            'email' => 'editor@p3pharmacy.co.uk',
+            'email' => 'editor@pharmacyowner.co.uk',
             'password' => Hash::make('password'),
             'first_name' => 'Sarah',
             'last_name' => 'Editor',
@@ -47,7 +47,7 @@ class RoleSeeder extends Seeder
 
         // Create content editor user
         User::create([
-            'email' => 'writer@p3pharmacy.co.uk',
+            'email' => 'writer@pharmacyowner.co.uk',
             'password' => Hash::make('password'),
             'first_name' => 'James',
             'last_name' => 'Writer',
@@ -61,7 +61,7 @@ class RoleSeeder extends Seeder
 
         // Create estate agent user
         User::create([
-            'email' => 'agent@p3pharmacy.co.uk',
+            'email' => 'agent@pharmacyowner.co.uk',
             'password' => Hash::make('password'),
             'first_name' => 'David',
             'last_name' => 'Agent',
@@ -127,10 +127,10 @@ class RoleSeeder extends Seeder
         $this->command->table(
             ['Email', 'Password', 'Role'],
             [
-                ['admin@p3pharmacy.co.uk', 'password', 'Admin'],
-                ['editor@p3pharmacy.co.uk', 'password', 'Editor'],
-                ['writer@p3pharmacy.co.uk', 'password', 'Content Editor'],
-                ['agent@p3pharmacy.co.uk', 'password', 'Estate Agent'],
+                ['admin@pharmacyowner.co.uk', 'password', 'Admin'],
+                ['editor@pharmacyowner.co.uk', 'password', 'Editor'],
+                ['writer@pharmacyowner.co.uk', 'password', 'Content Editor'],
+                ['agent@pharmacyowner.co.uk', 'password', 'Estate Agent'],
                 ['pharmacist@example.com', 'password', 'Registered User (Pharmacist)'],
                 ['owner@example.com', 'password', 'Registered User (Owner)'],
                 ['supplier@example.com', 'password', 'Supplier (Free)'],

@@ -18,11 +18,11 @@ class ArticleSeeder extends Seeder
             return;
         }
 
-        $editor = User::where('email', 'editor@p3pharmacy.co.uk')->first()
+        $editor = User::where('email', 'editor@pharmacyowner.co.uk')->first()
             ?? User::where('role', 'editor')->first()
             ?? User::where('role', 'admin')->first();
 
-        $writer = User::where('email', 'writer@p3pharmacy.co.uk')->first() ?? $editor;
+        $writer = User::where('email', 'writer@pharmacyowner.co.uk')->first() ?? $editor;
 
         if (! $editor) {
             $this->command?->warn('No editor/admin user found, skipping ArticleSeeder.');
@@ -155,7 +155,7 @@ class ArticleSeeder extends Seeder
 <li>Benchmark your operational KPIs against the regional averages in our market reports.</li>
 <li>Use the Resources area to find templates, checklists and calculators relevant to this topic.</li>
 </ul>
-<p><em>{$title} was published as part of P3 Pharmacy's market intelligence coverage.</em></p>
+<p><em>{$title} was published as part of Pharmacy Owner by P3's market intelligence coverage.</em></p>
 HTML;
     }
 }

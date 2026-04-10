@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ? "{$title} — P3 Pharmacy" : 'P3 Pharmacy — Intelligence. Analysis. Insight.' }}</title>
+    <title>{{ $title ? "{$title} — Pharmacy Owner by P3" : 'Pharmacy Owner by P3 — Intelligence. Analysis. Insight.' }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { theme: { extend: { colors: { brand: { DEFAULT: '#00875a', 50: '#e6f7f0', 500: '#00875a', 600: '#007a52', 700: '#006644' } } } } }</script>
@@ -26,7 +26,11 @@
         .header-top a:hover { color: var(--black); }
         .header-top-right { display: flex; gap: 16px; align-items: center; }
         .header-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-        .logo-main { font-weight: 900; font-size: 32px; letter-spacing: -1px; color: var(--black); text-decoration: none; }
+        .logo-main { font-family: 'Newsreader', serif; font-weight: 800; font-size: 30px; letter-spacing: -0.5px; color: var(--black); text-decoration: none; }
+        .logo-lockup { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+        .logo-lockup img { height: 56px; width: auto; display: block; flex-shrink: 0; }
+        .logo-lockup-text { display: flex; flex-direction: column; line-height: 1.15; }
+        .logo-lockup-text .logo-main { line-height: 1; }
         .logo-tagline { font-size: 11px; font-weight: 500; color: var(--grey-600); letter-spacing: 0.5px; margin-top: 2px; }
 
         /* Nav */
@@ -134,7 +138,8 @@
         /* Footer */
         .footer { background: var(--black); color: var(--white); padding: 56px 0 28px; margin-top: 60px; }
         .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--grey-700); }
-        .footer-brand .logo-main { font-size: 24px; color: var(--white); }
+        .footer-brand .logo-lockup img { height: 48px; }
+        .footer-brand .logo-main { font-size: 22px; color: var(--white); }
         .footer-brand .logo-tagline { color: var(--grey-400); margin-bottom: 12px; }
         .footer-desc { font-size: 13px; color: var(--grey-400); line-height: 1.6; }
         .footer-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey-400); margin-bottom: 14px; }
@@ -312,7 +317,10 @@
             .resources-grid-page { grid-template-columns: 1fr; }
             .resources-categories-inner { flex-wrap: wrap; gap: 8px; }
             .training-stats { flex-wrap: wrap; gap: 20px; }
-            .container { padding: 0 16px; }
+            /* Leave .container padding at 32px on mobile so the header
+               and footer on every authenticated page line up exactly with
+               the homepage. The landing page's .container does not drop
+               its padding on mobile, so this one must not either. */
             .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
             .grid-sidebar { grid-template-columns: 1fr; }
             .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -345,8 +353,13 @@
             </div>
             <div class="header-main">
                 <div>
-                    <a href="{{ auth()->check() ? route('home') : route('landing') }}" class="logo-main" style="text-decoration:none">p3pharmacy</a>
-                    <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    <a href="{{ auth()->check() ? route('home') : route('landing') }}" class="logo-lockup">
+                        <img src="{{ asset('images/p3-logo.png') }}" alt="P3 — For the Progressive Pharmacy Team">
+                        <span class="logo-lockup-text">
+                            <span class="logo-main">Pharmacy Owner</span>
+                            <span class="logo-tagline">by P3 &middot; Intelligence. Analysis. Insight.</span>
+                        </span>
+                    </a>
                 </div>
                 @auth
                     <div class="user-menu" x-data="{ open: false }">
@@ -411,8 +424,13 @@
         <div class="container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <div class="logo-main">p3pharmacy</div>
-                    <div class="logo-tagline">Intelligence. Analysis. Insight.</div>
+                    <div class="logo-lockup">
+                        <img src="{{ asset('images/p3-logo.png') }}" alt="P3">
+                        <span class="logo-lockup-text">
+                            <span class="logo-main">Pharmacy Owner</span>
+                            <span class="logo-tagline">by P3 &middot; Intelligence. Analysis. Insight.</span>
+                        </span>
+                    </div>
                     <p class="footer-desc">The essential resource for UK pharmacy owners and prospective buyers.</p>
                 </div>
                 <div class="footer-col">
@@ -449,7 +467,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; {{ date('Y') }} P3 Pharmacy. All rights reserved.</span>
+                <span>&copy; {{ date('Y') }} Pharmacy Owner by P3. All rights reserved.</span>
                 <span>
                     <a href="{{ route('privacy') }}">Privacy</a>
                     <a href="{{ route('terms') }}">Terms</a>

@@ -101,9 +101,9 @@ Route::get('/seed-db', function () {
         'steps' => $output,
         'counts' => $counts,
         'login' => [
-            'admin' => 'admin@p3pharmacy.co.uk / password',
-            'editor' => 'editor@p3pharmacy.co.uk / password',
-            'agent' => 'agent@p3pharmacy.co.uk / password',
+            'admin' => 'admin@pharmacyowner.co.uk / password',
+            'editor' => 'editor@pharmacyowner.co.uk / password',
+            'agent' => 'agent@pharmacyowner.co.uk / password',
         ],
     ], 200, [], JSON_PRETTY_PRINT);
 });
